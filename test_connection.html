@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>连接测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-item {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .success { border-left: 4px solid #4CAF50; }
+        .error { border-left: 4px solid #f44336; }
+        .loading { border-left: 4px solid #ff9800; }
+        button {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #1976D2; }
+        pre {
+            background: #f8f8f8;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 API连接测试</h1>
+    
+    <div class="test-item loading" id="status">
+        <h3>📊 连接状态</h3>
+        <p>正在测试连接...</p>
+    </div>
+    
+    <div class="test-item">
+        <h3>🧪 测试按钮</h3>
+        <button onclick="testHealth()">测试健康检查</button>
+        <button onclick="testProjects()">测试项目列表</button>
+        <button onclick="testAll()">测试所有接口</button>
+    </div>
+    
+    <div class="test-item" id="results" style="display: none;">
+        <h3>📋 测试结果</h3>
+        <pre id="resultContent"></pre>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+        
+        async function testAPI(url, name) {
+            try {
+                console.log(`测试 ${name}: ${url}`);
+                const response = await fetch(url);
+                const data = await response.json();
+                return { success: true, data, status: response.status };
+            } catch (error) {
+                console.error(`测试 ${name} 失败:`, error);
+                return { success: false, error: error.message };
+            }
+        }
+        
+        async function testHealth() {
+            const result = await testAPI(`${API_BASE}/health`, '健康检查');
+            showResult('健康检查', result);
+        }
+        
+        async function testProjects() {
+            const result = await testAPI(`${API_BASE}/api/v1/projects`, '项目列表');
+            showResult('项目列表', result);
+        }
+        
+        async function testAll() {
+            const statusDiv = document.getElementById('status');
+            statusDiv.className = 'test-item loading';
+            statusDiv.innerHTML = '<h3>📊 连接状态</h3><p>正在测试所有接口...</p>';
+            
+            const tests = [
+                { url: `${API_BASE}/health`, name: '健康检查' },
+                { url: `${API_BASE}/`, name: '根路径' },
+                { url: `${API_BASE}/api/v1/projects`, name: '项目列表' },
+                { url: `${API_BASE}/api/v1/tasks`, name: '任务列表' },
+                { url: `${API_BASE}/api/v1/auto-reduce/task-capture/meeting`, name: '任务提取' }
+            ];
+            
+            const results = [];
+            for (const test of tests) {
+                const result = await testAPI(test.url, test.name);
+                results.push({ ...test, ...result });
+            }
+            
+            const successCount = results.filter(r => r.success).length;
+            const totalCount = results.length;
+            
+            if (successCount === totalCount) {
+                statusDiv.className = 'test-item success';
+                statusDiv.innerHTML = `<h3>📊 连接状态</h3><p>✅ 所有接口正常 (${successCount}/${totalCount})</p>`;
+            } else {
+                statusDiv.className = 'test-item error';
+                statusDiv.innerHTML = `<h3>📊 连接状态</h3><p>❌ 部分接口异常 (${successCount}/${totalCount})</p>`;
+            }
+            
+            showResult('所有接口测试', results);
+        }
+        
+        function showResult(title, data) {
+            const resultsDiv = document.getElementById('results');
+            const contentDiv = document.getElementById('resultContent');
+            
+            contentDiv.textContent = JSON.stringify({ title, data }, null, 2);
+            resultsDiv.style.display = 'block';
+        }
+        
+        // 页面加载时自动测试
+        window.onload = function() {
+            testAll();
+        };
+    </script>
+</body>
+</html>

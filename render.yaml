@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: auto-reduce-ai
+    env: python
+    buildCommand: pip install -r requirements_deploy.txt
+    startCommand: python deploy_simple.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: PORT
+        value: 8000

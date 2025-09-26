@@ -1,0 +1,1237 @@
+{
+  "projects": [
+    {
+      "project_id": "PRJ-2024-001",
+      "project_name": "智能管理系统开发项目",
+      "project_code": "IMS-2024",
+      "description": "开发一套完整的智能管理系统，包括用户管理、数据集成、可视化分析等核心功能",
+      "project_type": "研发项目",
+      "status": "进行中",
+      "priority": "高",
+      "start_date": "2024-01-15T00:00:00Z",
+      "planned_end_date": "2024-06-30T00:00:00Z",
+      "actual_end_date": null,
+      "budget": 500000.00,
+      "actual_cost": 225000.00,
+      "project_manager": "张三",
+      "sponsor": "李总",
+      "stakeholders": ["技术部", "产品部", "市场部"],
+      "department": "技术部",
+      "business_unit": "研发中心",
+      "client": "内部项目",
+      "project_phase": "执行",
+      "created_at": "2024-01-10T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "project_id": "PRJ-2024-002",
+      "project_name": "客户关系管理系统升级",
+      "project_code": "CRM-2024",
+      "description": "升级现有CRM系统，增加AI智能推荐和自动化营销功能",
+      "project_type": "实施项目",
+      "status": "规划中",
+      "priority": "中",
+      "start_date": "2024-07-01T00:00:00Z",
+      "planned_end_date": "2024-12-31T00:00:00Z",
+      "actual_end_date": null,
+      "budget": 800000.00,
+      "actual_cost": 0.00,
+      "project_manager": "王五",
+      "sponsor": "张总",
+      "stakeholders": ["销售部", "市场部", "客服部"],
+      "department": "技术部",
+      "business_unit": "产品中心",
+      "client": "内部项目",
+      "project_phase": "规划",
+      "created_at": "2024-06-01T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "project_id": "BAT-2024-001",
+      "project_name": "高能量密度锂离子电池正极材料研发",
+      "project_code": "NCM-811",
+      "description": "开发新一代NCM811正极材料，目标能量密度达到300Wh/kg，提升电池续航能力",
+      "project_type": "研发项目",
+      "status": "进行中",
+      "priority": "高",
+      "start_date": "2024-02-01T00:00:00Z",
+      "planned_end_date": "2024-12-31T00:00:00Z",
+      "actual_end_date": null,
+      "budget": 1500000.00,
+      "actual_cost": 680000.00,
+      "project_manager": "陈博士",
+      "sponsor": "技术总监",
+      "stakeholders": ["研发部", "生产部", "质量部", "市场部"],
+      "department": "电池研发部",
+      "business_unit": "新能源事业部",
+      "client": "新能源汽车厂商",
+      "project_phase": "执行",
+      "methodology": "敏捷开发",
+      "created_at": "2024-01-15T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "project_id": "BAT-2024-002",
+      "project_name": "硅基负极材料产业化项目",
+      "project_code": "Si-Anode",
+      "description": "实现硅基负极材料的规模化生产，解决硅材料膨胀问题，提升电池循环寿命",
+      "project_type": "产业化项目",
+      "status": "进行中",
+      "priority": "高",
+      "start_date": "2024-03-01T00:00:00Z",
+      "planned_end_date": "2025-06-30T00:00:00Z",
+      "actual_end_date": null,
+      "budget": 2000000.00,
+      "actual_cost": 450000.00,
+      "project_manager": "李工程师",
+      "sponsor": "生产总监",
+      "stakeholders": ["研发部", "生产部", "设备部", "采购部"],
+      "department": "电池研发部",
+      "business_unit": "新能源事业部",
+      "client": "电池制造商",
+      "project_phase": "执行",
+      "methodology": "瀑布模型",
+      "created_at": "2024-02-15T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "project_id": "BAT-2024-003",
+      "project_name": "固态电解质材料研发",
+      "project_code": "SSE-2024",
+      "description": "开发新型固态电解质材料，提升电池安全性和能量密度，实现全固态电池技术突破",
+      "project_type": "研发项目",
+      "status": "规划中",
+      "priority": "中",
+      "start_date": "2024-08-01T00:00:00Z",
+      "planned_end_date": "2025-12-31T00:00:00Z",
+      "actual_end_date": null,
+      "budget": 1200000.00,
+      "actual_cost": 0.00,
+      "project_manager": "王研究员",
+      "sponsor": "研发总监",
+      "stakeholders": ["研发部", "测试部", "专利部"],
+      "department": "电池研发部",
+      "business_unit": "新能源事业部",
+      "client": "科研院所",
+      "project_phase": "规划",
+      "methodology": "敏捷开发",
+      "created_at": "2024-06-01T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "project_id": "ROB-2024-001",
+      "project_name": "智能养老服务机器人系统",
+      "project_code": "CareBot-Pro",
+      "description": "开发具备生活辅助、健康监测、情感陪伴功能的智能养老服务机器人",
+      "project_type": "研发项目",
+      "status": "进行中",
+      "priority": "高",
+      "start_date": "2024-01-01T00:00:00Z",
+      "planned_end_date": "2024-11-30T00:00:00Z",
+      "actual_end_date": null,
+      "budget": 3000000.00,
+      "actual_cost": 1200000.00,
+      "project_manager": "刘工程师",
+      "sponsor": "产品总监",
+      "stakeholders": ["硬件部", "软件部", "AI部", "测试部", "市场部"],
+      "department": "机器人研发部",
+      "business_unit": "智能硬件事业部",
+      "client": "养老机构",
+      "project_phase": "执行",
+      "methodology": "敏捷开发",
+      "created_at": "2023-12-15T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "project_id": "ROB-2024-002",
+      "project_name": "机器人运动控制系统",
+      "project_code": "Motion-Control",
+      "description": "开发高精度机器人运动控制系统，支持多关节协调控制和路径规划",
+      "project_type": "研发项目",
+      "status": "进行中",
+      "priority": "高",
+      "start_date": "2024-02-15T00:00:00Z",
+      "planned_end_date": "2024-10-31T00:00:00Z",
+      "actual_end_date": null,
+      "budget": 800000.00,
+      "actual_cost": 320000.00,
+      "project_manager": "赵工程师",
+      "sponsor": "技术总监",
+      "stakeholders": ["硬件部", "软件部", "算法部"],
+      "department": "机器人研发部",
+      "business_unit": "智能硬件事业部",
+      "client": "内部项目",
+      "project_phase": "执行",
+      "methodology": "瀑布模型",
+      "created_at": "2024-01-20T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "project_id": "ROB-2024-003",
+      "project_name": "AI语音交互系统",
+      "project_code": "Voice-AI",
+      "description": "开发面向老年人的自然语言处理和语音识别系统，支持方言识别和情感分析",
+      "project_type": "研发项目",
+      "status": "进行中",
+      "priority": "中",
+      "start_date": "2024-03-01T00:00:00Z",
+      "planned_end_date": "2024-12-15T00:00:00Z",
+      "actual_end_date": null,
+      "budget": 600000.00,
+      "actual_cost": 180000.00,
+      "project_manager": "孙工程师",
+      "sponsor": "AI总监",
+      "stakeholders": ["AI部", "软件部", "测试部"],
+      "department": "AI研发部",
+      "business_unit": "智能硬件事业部",
+      "client": "内部项目",
+      "project_phase": "执行",
+      "methodology": "敏捷开发",
+      "created_at": "2024-02-15T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "project_id": "ENE-2024-001",
+      "project_name": "智能能源管理平台",
+      "project_code": "Energy-OS",
+      "description": "开发企业级智能能源管理平台，实现能源消耗监控、优化调度和成本分析",
+      "project_type": "研发项目",
+      "status": "进行中",
+      "priority": "高",
+      "start_date": "2024-01-20T00:00:00Z",
+      "planned_end_date": "2024-09-30T00:00:00Z",
+      "actual_end_date": null,
+      "budget": 1800000.00,
+      "actual_cost": 750000.00,
+      "project_manager": "周工程师",
+      "sponsor": "技术总监",
+      "stakeholders": ["软件部", "数据部", "运维部", "业务部"],
+      "department": "软件研发部",
+      "business_unit": "能源科技事业部",
+      "client": "工业企业",
+      "project_phase": "执行",
+      "methodology": "敏捷开发",
+      "created_at": "2024-01-10T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "project_id": "ENE-2024-002",
+      "project_name": "分布式能源调度系统",
+      "project_code": "Dist-Energy",
+      "description": "开发分布式能源调度系统，支持多种能源类型协调调度和智能优化",
+      "project_type": "研发项目",
+      "status": "进行中",
+      "priority": "中",
+      "start_date": "2024-04-01T00:00:00Z",
+      "planned_end_date": "2025-03-31T00:00:00Z",
+      "actual_end_date": null,
+      "budget": 1200000.00,
+      "actual_cost": 280000.00,
+      "project_manager": "吴工程师",
+      "sponsor": "产品总监",
+      "stakeholders": ["软件部", "算法部", "测试部"],
+      "department": "软件研发部",
+      "business_unit": "能源科技事业部",
+      "client": "电力公司",
+      "project_phase": "执行",
+      "methodology": "瀑布模型",
+      "created_at": "2024-03-15T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "project_id": "ENE-2024-003",
+      "project_name": "能源数据分析平台",
+      "project_code": "Energy-Analytics",
+      "description": "构建基于大数据的能源分析平台，提供预测性维护和能效优化建议",
+      "project_type": "研发项目",
+      "status": "规划中",
+      "priority": "中",
+      "start_date": "2024-09-01T00:00:00Z",
+      "planned_end_date": "2025-08-31T00:00:00Z",
+      "actual_end_date": null,
+      "budget": 900000.00,
+      "actual_cost": 0.00,
+      "project_manager": "郑工程师",
+      "sponsor": "数据总监",
+      "stakeholders": ["数据部", "软件部", "AI部"],
+      "department": "数据研发部",
+      "business_unit": "能源科技事业部",
+      "client": "能源服务商",
+      "project_phase": "规划",
+      "methodology": "敏捷开发",
+      "created_at": "2024-06-01T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    }
+  ],
+  "tasks": [
+    {
+      "task_id": "TASK-001",
+      "project_id": "PRJ-2024-001",
+      "task_name": "用户认证模块开发",
+      "description": "开发用户登录、注册、权限管理等功能模块",
+      "task_type": "开发任务",
+      "status": "已完成",
+      "priority": "高",
+      "assigned_to": "张三",
+      "created_by": "张三",
+      "start_date": "2024-01-20T00:00:00Z",
+      "due_date": "2024-02-15T00:00:00Z",
+      "actual_start_date": "2024-01-20T00:00:00Z",
+      "actual_end_date": "2024-02-10T00:00:00Z",
+      "estimated_hours": 120.0,
+      "actual_hours": 115.0,
+      "progress_percentage": 100,
+      "dependencies": [],
+      "tags": ["后端", "安全", "核心功能"],
+      "created_at": "2024-01-15T00:00:00Z",
+      "updated_at": "2024-02-10T00:00:00Z"
+    },
+    {
+      "task_id": "BAT-TASK-001",
+      "project_id": "BAT-2024-001",
+      "task_name": "NCM811材料合成工艺优化",
+      "description": "优化NCM811正极材料的合成工艺，提升材料纯度和结晶度",
+      "task_type": "研发任务",
+      "status": "已完成",
+      "priority": "高",
+      "assigned_to": "陈博士",
+      "created_by": "陈博士",
+      "start_date": "2024-02-01T00:00:00Z",
+      "due_date": "2024-04-30T00:00:00Z",
+      "actual_start_date": "2024-02-01T00:00:00Z",
+      "actual_end_date": "2024-04-25T00:00:00Z",
+      "estimated_hours": 400.0,
+      "actual_hours": 380.0,
+      "progress_percentage": 100,
+      "dependencies": [],
+      "tags": ["材料合成", "工艺优化", "正极材料"],
+      "created_at": "2024-01-15T00:00:00Z",
+      "updated_at": "2024-04-25T00:00:00Z"
+    },
+    {
+      "task_id": "BAT-TASK-002",
+      "project_id": "BAT-2024-001",
+      "task_name": "电化学性能测试",
+      "description": "对NCM811材料进行充放电测试、循环寿命测试和倍率性能测试",
+      "task_type": "测试任务",
+      "status": "进行中",
+      "priority": "高",
+      "assigned_to": "李研究员",
+      "created_by": "陈博士",
+      "start_date": "2024-05-01T00:00:00Z",
+      "due_date": "2024-08-31T00:00:00Z",
+      "actual_start_date": "2024-05-01T00:00:00Z",
+      "actual_end_date": null,
+      "estimated_hours": 300.0,
+      "actual_hours": 180.0,
+      "progress_percentage": 60,
+      "dependencies": ["BAT-TASK-001"],
+      "tags": ["电化学测试", "性能评估", "电池测试"],
+      "created_at": "2024-01-15T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "task_id": "ROB-TASK-001",
+      "project_id": "ROB-2024-001",
+      "task_name": "机器人硬件平台设计",
+      "description": "设计养老服务机器人的机械结构、传感器布局和控制系统硬件",
+      "task_type": "设计任务",
+      "status": "已完成",
+      "priority": "高",
+      "assigned_to": "刘工程师",
+      "created_by": "刘工程师",
+      "start_date": "2024-01-01T00:00:00Z",
+      "due_date": "2024-03-31T00:00:00Z",
+      "actual_start_date": "2024-01-01T00:00:00Z",
+      "actual_end_date": "2024-03-25T00:00:00Z",
+      "estimated_hours": 500.0,
+      "actual_hours": 480.0,
+      "progress_percentage": 100,
+      "dependencies": [],
+      "tags": ["硬件设计", "机械结构", "传感器"],
+      "created_at": "2023-12-15T00:00:00Z",
+      "updated_at": "2024-03-25T00:00:00Z"
+    },
+    {
+      "task_id": "ROB-TASK-002",
+      "project_id": "ROB-2024-001",
+      "task_name": "AI情感识别算法开发",
+      "description": "开发基于深度学习的老年人情感识别算法，支持面部表情和语音情感分析",
+      "task_type": "开发任务",
+      "status": "进行中",
+      "priority": "高",
+      "assigned_to": "孙工程师",
+      "created_by": "刘工程师",
+      "start_date": "2024-02-01T00:00:00Z",
+      "due_date": "2024-07-31T00:00:00Z",
+      "actual_start_date": "2024-02-01T00:00:00Z",
+      "actual_end_date": null,
+      "estimated_hours": 400.0,
+      "actual_hours": 200.0,
+      "progress_percentage": 50,
+      "dependencies": [],
+      "tags": ["AI算法", "情感识别", "深度学习"],
+      "created_at": "2023-12-15T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "task_id": "ENE-TASK-001",
+      "project_id": "ENE-2024-001",
+      "task_name": "能源数据采集系统开发",
+      "description": "开发多源能源数据采集系统，支持电力、燃气、水等多种能源类型",
+      "task_type": "开发任务",
+      "status": "已完成",
+      "priority": "高",
+      "assigned_to": "周工程师",
+      "created_by": "周工程师",
+      "start_date": "2024-01-20T00:00:00Z",
+      "due_date": "2024-03-31T00:00:00Z",
+      "actual_start_date": "2024-01-20T00:00:00Z",
+      "actual_end_date": "2024-03-28T00:00:00Z",
+      "estimated_hours": 300.0,
+      "actual_hours": 290.0,
+      "progress_percentage": 100,
+      "dependencies": [],
+      "tags": ["数据采集", "IoT", "能源监控"],
+      "created_at": "2024-01-10T00:00:00Z",
+      "updated_at": "2024-03-28T00:00:00Z"
+    },
+    {
+      "task_id": "ENE-TASK-002",
+      "project_id": "ENE-2024-001",
+      "task_name": "智能优化算法开发",
+      "description": "开发基于机器学习的能源消耗优化算法，实现智能调度和成本优化",
+      "task_type": "开发任务",
+      "status": "进行中",
+      "priority": "高",
+      "assigned_to": "吴工程师",
+      "created_by": "周工程师",
+      "start_date": "2024-04-01T00:00:00Z",
+      "due_date": "2024-07-31T00:00:00Z",
+      "actual_start_date": "2024-04-01T00:00:00Z",
+      "actual_end_date": null,
+      "estimated_hours": 400.0,
+      "actual_hours": 200.0,
+      "progress_percentage": 50,
+      "dependencies": ["ENE-TASK-001"],
+      "tags": ["机器学习", "优化算法", "智能调度"],
+      "created_at": "2024-01-10T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    }
+  ],
+  "milestones": [
+    {
+      "milestone_id": "MS-001",
+      "project_id": "PRJ-2024-001",
+      "milestone_name": "核心功能开发完成",
+      "description": "完成用户认证、数据可视化和API接口开发",
+      "status": "进行中",
+      "priority": "高",
+      "planned_date": "2024-04-01T00:00:00Z",
+      "actual_date": null,
+      "success_criteria": "所有核心功能模块开发完成并通过单元测试",
+      "created_at": "2024-01-15T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "milestone_id": "BAT-MS-001",
+      "project_id": "BAT-2024-001",
+      "milestone_name": "NCM811材料性能达标",
+      "description": "NCM811材料达到能量密度300Wh/kg的性能指标",
+      "status": "进行中",
+      "priority": "高",
+      "planned_date": "2024-08-31T00:00:00Z",
+      "actual_date": null,
+      "success_criteria": "能量密度≥300Wh/kg，循环寿命≥1000次",
+      "created_at": "2024-01-15T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "milestone_id": "ROB-MS-001",
+      "project_id": "ROB-2024-001",
+      "milestone_name": "机器人原型机完成",
+      "description": "完成养老服务机器人原型机开发和基础功能验证",
+      "status": "进行中",
+      "priority": "高",
+      "planned_date": "2024-08-31T00:00:00Z",
+      "actual_date": null,
+      "success_criteria": "原型机完成，基础功能正常运行",
+      "created_at": "2023-12-15T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "milestone_id": "ENE-MS-001",
+      "project_id": "ENE-2024-001",
+      "milestone_name": "平台核心功能上线",
+      "description": "能源管理平台核心功能开发完成并上线运行",
+      "status": "进行中",
+      "priority": "高",
+      "planned_date": "2024-07-31T00:00:00Z",
+      "actual_date": null,
+      "success_criteria": "数据采集、监控、分析功能正常运行",
+      "created_at": "2024-01-10T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    }
+  ],
+  "risks": [
+    {
+      "risk_id": "RISK-001",
+      "project_id": "PRJ-2024-001",
+      "risk_title": "API开发进度延期",
+      "description": "由于技术复杂度较高，API开发可能无法按计划完成",
+      "risk_level": "严重",
+      "probability": "中",
+      "impact": "高",
+      "status": "已识别",
+      "mitigation_plan": "增加开发人员，优化开发流程，采用敏捷开发方法",
+      "owner": "张三",
+      "created_at": "2024-02-01T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "risk_id": "BAT-RISK-001",
+      "project_id": "BAT-2024-001",
+      "risk_title": "材料性能不达标",
+      "description": "NCM811材料可能无法达到预期的能量密度和循环寿命要求",
+      "risk_level": "高",
+      "probability": "中",
+      "impact": "高",
+      "status": "已识别",
+      "mitigation_plan": "加强材料表征分析，优化合成工艺，建立备用方案",
+      "owner": "陈博士",
+      "created_at": "2024-02-01T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "risk_id": "ROB-RISK-001",
+      "project_id": "ROB-2024-001",
+      "risk_title": "AI算法精度不足",
+      "description": "情感识别和语音交互算法可能无法满足老年人使用需求",
+      "risk_level": "高",
+      "probability": "中",
+      "impact": "高",
+      "status": "已识别",
+      "mitigation_plan": "增加训练数据，优化算法模型，进行用户测试验证",
+      "owner": "孙工程师",
+      "created_at": "2024-02-01T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "risk_id": "ENE-RISK-001",
+      "project_id": "ENE-2024-001",
+      "risk_title": "数据集成复杂性",
+      "description": "多源能源数据集成可能遇到兼容性和实时性问题",
+      "risk_level": "中",
+      "probability": "高",
+      "impact": "中",
+      "status": "已识别",
+      "mitigation_plan": "建立标准化数据接口，采用微服务架构，加强测试验证",
+      "owner": "周工程师",
+      "created_at": "2024-02-01T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    }
+  ],
+  "issues": [
+    {
+      "issue_id": "ISSUE-001",
+      "project_id": "PRJ-2024-001",
+      "issue_title": "数据库连接超时",
+      "description": "在高并发情况下，数据库连接经常出现超时问题",
+      "priority": "高",
+      "status": "进行中",
+      "assigned_to": "张三",
+      "reporter": "李四",
+      "created_at": "2024-03-15T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "issue_id": "BAT-ISSUE-001",
+      "project_id": "BAT-2024-001",
+      "issue_title": "材料批次稳定性问题",
+      "description": "不同批次的NCM811材料性能存在差异，影响产品一致性",
+      "priority": "高",
+      "status": "进行中",
+      "assigned_to": "陈博士",
+      "reporter": "李研究员",
+      "created_at": "2024-04-01T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    }
+  ],
+  "users": [
+    {
+      "user_id": "USER-001",
+      "username": "张三",
+      "email": "zhangsan@company.com",
+      "role": "项目经理",
+      "department": "技术部",
+      "workload_percentage": 120.0,
+      "skills": ["项目管理", "后端开发", "系统架构"],
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "user_id": "USER-002",
+      "username": "李四",
+      "email": "lisi@company.com",
+      "role": "前端开发工程师",
+      "department": "技术部",
+      "workload_percentage": 85.0,
+      "skills": ["前端开发", "UI设计", "用户体验"],
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "user_id": "USER-003",
+      "username": "陈博士",
+      "email": "chen@company.com",
+      "role": "材料研发专家",
+      "department": "电池研发部",
+      "workload_percentage": 95.0,
+      "skills": ["材料科学", "电化学", "电池技术"],
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "user_id": "USER-004",
+      "username": "刘工程师",
+      "email": "liu@company.com",
+      "role": "机器人工程师",
+      "department": "机器人研发部",
+      "workload_percentage": 110.0,
+      "skills": ["机械设计", "控制系统", "机器人技术"],
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "user_id": "USER-005",
+      "username": "周工程师",
+      "email": "zhou@company.com",
+      "role": "软件架构师",
+      "department": "软件研发部",
+      "workload_percentage": 90.0,
+      "skills": ["软件架构", "大数据", "云计算"],
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    }
+  ],
+  "resources": [
+    {
+      "resource_id": "RES-001",
+      "resource_name": "高性能计算服务器",
+      "resource_type": "硬件设备",
+      "status": "使用中",
+      "assigned_to": "BAT-2024-001",
+      "cost_per_hour": 50.0,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "resource_id": "RES-002",
+      "resource_name": "机器人测试实验室",
+      "resource_type": "实验室",
+      "status": "使用中",
+      "assigned_to": "ROB-2024-001",
+      "cost_per_hour": 100.0,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    },
+    {
+      "resource_id": "RES-003",
+      "resource_name": "云服务器集群",
+      "resource_type": "云服务",
+      "status": "使用中",
+      "assigned_to": "ENE-2024-001",
+      "cost_per_hour": 30.0,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z"
+    }
+  ],
+  "gantt_charts": [
+    {
+      "gantt_id": "GANTT-001",
+      "project_id": "BAT-2024-002",
+      "project_name": "硅基负极材料产业化项目",
+      "methodology": "瀑布模型",
+      "description": "硅基负极材料产业化项目甘特图 - 瀑布开发模式",
+      "created_at": "2024-03-01T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z",
+      "phases": [
+        {
+          "phase_id": "PHASE-001",
+          "phase_name": "需求分析阶段",
+          "start_date": "2024-03-01T00:00:00Z",
+          "end_date": "2024-03-31T00:00:00Z",
+          "actual_start_date": "2024-03-01T00:00:00Z",
+          "actual_end_date": "2024-03-28T00:00:00Z",
+          "progress_percentage": 100,
+          "status": "已完成",
+          "tasks": [
+            {
+              "task_id": "BAT-TASK-101",
+              "task_name": "市场需求调研",
+              "start_date": "2024-03-01T00:00:00Z",
+              "end_date": "2024-03-15T00:00:00Z",
+              "actual_start_date": "2024-03-01T00:00:00Z",
+              "actual_end_date": "2024-03-12T00:00:00Z",
+              "progress_percentage": 100,
+              "status": "已完成",
+              "assigned_to": "李工程师",
+              "dependencies": []
+            },
+            {
+              "task_id": "BAT-TASK-102",
+              "task_name": "技术可行性分析",
+              "start_date": "2024-03-16T00:00:00Z",
+              "end_date": "2024-03-31T00:00:00Z",
+              "actual_start_date": "2024-03-13T00:00:00Z",
+              "actual_end_date": "2024-03-28T00:00:00Z",
+              "progress_percentage": 100,
+              "status": "已完成",
+              "assigned_to": "陈博士",
+              "dependencies": ["BAT-TASK-101"]
+            }
+          ]
+        },
+        {
+          "phase_id": "PHASE-002",
+          "phase_name": "系统设计阶段",
+          "start_date": "2024-04-01T00:00:00Z",
+          "end_date": "2024-05-31T00:00:00Z",
+          "actual_start_date": "2024-04-01T00:00:00Z",
+          "actual_end_date": null,
+          "progress_percentage": 75,
+          "status": "进行中",
+          "tasks": [
+            {
+              "task_id": "BAT-TASK-103",
+              "task_name": "工艺流程设计",
+              "start_date": "2024-04-01T00:00:00Z",
+              "end_date": "2024-04-30T00:00:00Z",
+              "actual_start_date": "2024-04-01T00:00:00Z",
+              "actual_end_date": null,
+              "progress_percentage": 90,
+              "status": "进行中",
+              "assigned_to": "李工程师",
+              "dependencies": ["BAT-TASK-102"]
+            },
+            {
+              "task_id": "BAT-TASK-104",
+              "task_name": "设备选型与配置",
+              "start_date": "2024-05-01T00:00:00Z",
+              "end_date": "2024-05-31T00:00:00Z",
+              "actual_start_date": "2024-05-01T00:00:00Z",
+              "actual_end_date": null,
+              "progress_percentage": 60,
+              "status": "进行中",
+              "assigned_to": "设备工程师",
+              "dependencies": ["BAT-TASK-103"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "gantt_id": "GANTT-002",
+      "project_id": "ROB-2024-001",
+      "project_name": "智能养老服务机器人系统",
+      "methodology": "敏捷开发",
+      "description": "智能养老服务机器人系统甘特图 - 敏捷开发模式",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-06-15T00:00:00Z",
+      "sprints": [
+        {
+          "sprint_id": "SPRINT-001",
+          "sprint_name": "Sprint 1 - 基础平台",
+          "start_date": "2024-01-01T00:00:00Z",
+          "end_date": "2024-01-28T00:00:00Z",
+          "actual_start_date": "2024-01-01T00:00:00Z",
+          "actual_end_date": "2024-01-28T00:00:00Z",
+          "progress_percentage": 100,
+          "status": "已完成",
+          "velocity": 25,
+          "story_points": 25,
+          "tasks": [
+            {
+              "task_id": "ROB-TASK-201",
+              "task_name": "机器人硬件平台设计",
+              "start_date": "2024-01-01T00:00:00Z",
+              "end_date": "2024-01-28T00:00:00Z",
+              "actual_start_date": "2024-01-01T00:00:00Z",
+              "actual_end_date": "2024-01-25T00:00:00Z",
+              "progress_percentage": 100,
+              "status": "已完成",
+              "assigned_to": "刘工程师",
+              "story_points": 13,
+              "dependencies": []
+            },
+            {
+              "task_id": "ROB-TASK-202",
+              "task_name": "基础控制系统开发",
+              "start_date": "2024-01-15T00:00:00Z",
+              "end_date": "2024-01-28T00:00:00Z",
+              "actual_start_date": "2024-01-15T00:00:00Z",
+              "actual_end_date": "2024-01-28T00:00:00Z",
+              "progress_percentage": 100,
+              "status": "已完成",
+              "assigned_to": "赵工程师",
+              "story_points": 12,
+              "dependencies": ["ROB-TASK-201"]
+            }
+          ]
+        },
+        {
+          "sprint_id": "SPRINT-002",
+          "sprint_name": "Sprint 2 - 感知系统",
+          "start_date": "2024-01-29T00:00:00Z",
+          "end_date": "2024-02-25T00:00:00Z",
+          "actual_start_date": "2024-01-29T00:00:00Z",
+          "actual_end_date": "2024-02-25T00:00:00Z",
+          "progress_percentage": 100,
+          "status": "已完成",
+          "velocity": 22,
+          "story_points": 22,
+          "tasks": [
+            {
+              "task_id": "ROB-TASK-203",
+              "task_name": "视觉识别系统开发",
+              "start_date": "2024-01-29T00:00:00Z",
+              "end_date": "2024-02-25T00:00:00Z",
+              "actual_start_date": "2024-01-29T00:00:00Z",
+              "actual_end_date": "2024-02-25T00:00:00Z",
+              "progress_percentage": 100,
+              "status": "已完成",
+              "assigned_to": "AI团队",
+              "story_points": 15,
+              "dependencies": ["ROB-TASK-202"]
+            },
+            {
+              "task_id": "ROB-TASK-204",
+              "task_name": "传感器集成",
+              "start_date": "2024-02-05T00:00:00Z",
+              "end_date": "2024-02-25T00:00:00Z",
+              "actual_start_date": "2024-02-05T00:00:00Z",
+              "actual_end_date": "2024-02-25T00:00:00Z",
+              "progress_percentage": 100,
+              "status": "已完成",
+              "assigned_to": "硬件团队",
+              "story_points": 7,
+              "dependencies": ["ROB-TASK-201"]
+            }
+          ]
+        },
+        {
+          "sprint_id": "SPRINT-003",
+          "sprint_name": "Sprint 3 - AI交互",
+          "start_date": "2024-02-26T00:00:00Z",
+          "end_date": "2024-03-25T00:00:00Z",
+          "actual_start_date": "2024-02-26T00:00:00Z",
+          "actual_end_date": null,
+          "progress_percentage": 80,
+          "status": "进行中",
+          "velocity": 20,
+          "story_points": 25,
+          "tasks": [
+            {
+              "task_id": "ROB-TASK-205",
+              "task_name": "AI情感识别算法开发",
+              "start_date": "2024-02-26T00:00:00Z",
+              "end_date": "2024-03-25T00:00:00Z",
+              "actual_start_date": "2024-02-26T00:00:00Z",
+              "actual_end_date": null,
+              "progress_percentage": 50,
+              "status": "进行中",
+              "assigned_to": "孙工程师",
+              "story_points": 18,
+              "dependencies": ["ROB-TASK-203"]
+            },
+            {
+              "task_id": "ROB-TASK-206",
+              "task_name": "语音交互系统",
+              "start_date": "2024-03-05T00:00:00Z",
+              "end_date": "2024-03-25T00:00:00Z",
+              "actual_start_date": "2024-03-05T00:00:00Z",
+              "actual_end_date": null,
+              "progress_percentage": 70,
+              "status": "进行中",
+              "assigned_to": "语音团队",
+              "story_points": 7,
+              "dependencies": ["ROB-TASK-203"]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "weekly_reports": [
+    {
+      "report_id": "WR-2024-001",
+      "project_id": "PRJ-2024-001",
+      "project_name": "智能管理系统开发项目",
+      "report_type": "周报",
+      "report_period": "2024年第24周",
+      "start_date": "2024-06-10T00:00:00Z",
+      "end_date": "2024-06-16T00:00:00Z",
+      "created_date": "2024-06-16T00:00:00Z",
+      "created_by": "张三",
+      "status": "已完成",
+      "summary": "本周主要完成了用户认证模块的测试和优化，数据可视化界面开发进展顺利，API接口开发遇到技术难点需要解决。",
+      "completed_tasks": [
+        {
+          "task_id": "TASK-001",
+          "task_name": "用户认证模块开发",
+          "completion_percentage": 100,
+          "status": "已完成",
+          "notes": "已完成所有功能测试，性能优化完成"
+        }
+      ],
+      "in_progress_tasks": [
+        {
+          "task_id": "TASK-002",
+          "task_name": "数据可视化界面开发",
+          "completion_percentage": 75,
+          "status": "进行中",
+          "notes": "主要图表组件已完成，正在优化交互体验"
+        },
+        {
+          "task_id": "TASK-003",
+          "task_name": "API接口开发",
+          "completion_percentage": 60,
+          "status": "进行中",
+          "notes": "遇到数据库连接池配置问题，需要进一步优化"
+        }
+      ],
+      "next_week_plans": [
+        "完成数据可视化界面的剩余功能",
+        "解决API接口的数据库连接问题",
+        "开始系统集成测试准备工作"
+      ],
+      "risks_issues": [
+        {
+          "type": "风险",
+          "description": "API开发进度可能延期",
+          "impact": "高",
+          "mitigation": "增加开发人员，优化开发流程"
+        }
+      ],
+      "metrics": {
+        "hours_worked": 40,
+        "budget_used": 15000,
+        "progress_percentage": 70,
+        "team_satisfaction": 8.5,
+        "quality_score": 85
+      }
+    },
+    {
+      "report_id": "WR-2024-002",
+      "project_id": "BAT-2024-001",
+      "project_name": "高能量密度锂离子电池正极材料研发",
+      "report_type": "周报",
+      "report_period": "2024年第24周",
+      "start_date": "2024-06-10T00:00:00Z",
+      "end_date": "2024-06-16T00:00:00Z",
+      "created_date": "2024-06-16T00:00:00Z",
+      "created_by": "陈博士",
+      "status": "已完成",
+      "summary": "本周完成了NCM811材料的第三批合成实验，电化学性能测试结果显示能量密度达到295Wh/kg，接近目标值。",
+      "completed_tasks": [
+        {
+          "task_id": "BAT-TASK-001",
+          "task_name": "NCM811材料合成工艺优化",
+          "completion_percentage": 100,
+          "status": "已完成",
+          "notes": "工艺参数已优化，材料纯度达到99.5%"
+        }
+      ],
+      "in_progress_tasks": [
+        {
+          "task_id": "BAT-TASK-002",
+          "task_name": "电化学性能测试",
+          "completion_percentage": 60,
+          "status": "进行中",
+          "notes": "已完成充放电测试，循环寿命测试进行中"
+        }
+      ],
+      "next_week_plans": [
+        "完成循环寿命测试",
+        "进行倍率性能测试",
+        "分析测试数据并优化材料配方"
+      ],
+      "risks_issues": [
+        {
+          "type": "风险",
+          "description": "材料性能可能无法达到300Wh/kg目标",
+          "impact": "高",
+          "mitigation": "继续优化合成工艺，考虑添加助剂"
+        }
+      ],
+      "metrics": {
+        "hours_worked": 45,
+        "budget_used": 25000,
+        "progress_percentage": 60,
+        "team_satisfaction": 9.0,
+        "quality_score": 90
+      }
+    },
+    {
+      "report_id": "WR-2024-003",
+      "project_id": "ROB-2024-001",
+      "project_name": "智能养老服务机器人系统",
+      "report_type": "周报",
+      "report_period": "2024年第24周",
+      "start_date": "2024-06-10T00:00:00Z",
+      "end_date": "2024-06-16T00:00:00Z",
+      "created_date": "2024-06-16T00:00:00Z",
+      "created_by": "刘工程师",
+      "status": "已完成",
+      "summary": "本周完成了机器人硬件平台的最终调试，AI情感识别算法开发进展良好，语音交互系统基础功能已实现。",
+      "completed_tasks": [
+        {
+          "task_id": "ROB-TASK-001",
+          "task_name": "机器人硬件平台设计",
+          "completion_percentage": 100,
+          "status": "已完成",
+          "notes": "硬件平台已通过所有测试，性能稳定"
+        }
+      ],
+      "in_progress_tasks": [
+        {
+          "task_id": "ROB-TASK-002",
+          "task_name": "AI情感识别算法开发",
+          "completion_percentage": 50,
+          "status": "进行中",
+          "notes": "基础算法框架已完成，正在优化识别精度"
+        },
+        {
+          "task_id": "ROB-TASK-206",
+          "task_name": "语音交互系统",
+          "completion_percentage": 70,
+          "status": "进行中",
+          "notes": "基础语音识别功能已实现，正在集成情感分析"
+        }
+      ],
+      "next_week_plans": [
+        "优化AI情感识别算法精度",
+        "完成语音交互系统的情感分析集成",
+        "开始系统集成测试"
+      ],
+      "risks_issues": [
+        {
+          "type": "风险",
+          "description": "AI算法精度可能无法满足老年人使用需求",
+          "impact": "高",
+          "mitigation": "增加训练数据，优化算法模型"
+        }
+      ],
+      "metrics": {
+        "hours_worked": 50,
+        "budget_used": 35000,
+        "progress_percentage": 60,
+        "team_satisfaction": 8.8,
+        "quality_score": 88
+      }
+    }
+  ],
+  "monthly_reports": [
+    {
+      "report_id": "MR-2024-001",
+      "project_id": "PRJ-2024-001",
+      "project_name": "智能管理系统开发项目",
+      "report_type": "月报",
+      "report_period": "2024年6月",
+      "start_date": "2024-06-01T00:00:00Z",
+      "end_date": "2024-06-30T00:00:00Z",
+      "created_date": "2024-06-30T00:00:00Z",
+      "created_by": "张三",
+      "status": "已完成",
+      "executive_summary": "本月项目整体进展顺利，核心功能模块开发基本完成，但API接口开发遇到技术挑战，需要在下月重点解决。",
+      "key_achievements": [
+        "完成用户认证模块开发并通过测试",
+        "数据可视化界面开发完成75%",
+        "完成系统架构设计和数据库设计",
+        "建立完整的开发测试环境"
+      ],
+      "major_milestones": [
+        {
+          "milestone": "核心功能开发完成",
+          "status": "进行中",
+          "progress": 70,
+          "notes": "预计下月完成"
+        }
+      ],
+      "budget_analysis": {
+        "planned_budget": 500000,
+        "actual_spent": 225000,
+        "budget_utilization": 45,
+        "cost_variance": 0,
+        "forecast_completion_cost": 500000
+      },
+      "schedule_analysis": {
+        "planned_progress": 80,
+        "actual_progress": 70,
+        "schedule_variance": -10,
+        "critical_path_status": "正常",
+        "forecast_completion_date": "2024-07-15"
+      },
+      "quality_metrics": {
+        "defect_density": 0.5,
+        "test_coverage": 85,
+        "code_review_completion": 90,
+        "user_satisfaction": 8.5
+      },
+      "risk_assessment": [
+        {
+          "risk": "API开发进度延期",
+          "probability": "中",
+          "impact": "高",
+          "status": "已识别",
+          "mitigation": "增加开发人员，采用敏捷开发方法"
+        }
+      ],
+      "next_month_plans": [
+        "完成API接口开发",
+        "进行系统集成测试",
+        "开始用户验收测试准备",
+        "优化系统性能"
+      ],
+      "lessons_learned": [
+        "需要更早进行技术难点识别",
+        "团队协作效率有待提升",
+        "测试环境配置需要标准化"
+      ]
+    },
+    {
+      "report_id": "MR-2024-002",
+      "project_id": "BAT-2024-001",
+      "project_name": "高能量密度锂离子电池正极材料研发",
+      "report_type": "月报",
+      "report_period": "2024年6月",
+      "start_date": "2024-06-01T00:00:00Z",
+      "end_date": "2024-06-30T00:00:00Z",
+      "created_date": "2024-06-30T00:00:00Z",
+      "created_by": "陈博士",
+      "status": "已完成",
+      "executive_summary": "本月NCM811材料研发取得重要进展，材料合成工艺已优化完成，电化学性能测试显示能量密度接近目标值，但循环寿命仍需改进。",
+      "key_achievements": [
+        "完成NCM811材料合成工艺优化",
+        "材料纯度达到99.5%",
+        "能量密度达到295Wh/kg",
+        "建立完整的材料表征体系"
+      ],
+      "major_milestones": [
+        {
+          "milestone": "NCM811材料性能达标",
+          "status": "进行中",
+          "progress": 60,
+          "notes": "能量密度接近目标，循环寿命需优化"
+        }
+      ],
+      "budget_analysis": {
+        "planned_budget": 1500000,
+        "actual_spent": 680000,
+        "budget_utilization": 45.3,
+        "cost_variance": 0,
+        "forecast_completion_cost": 1500000
+      },
+      "schedule_analysis": {
+        "planned_progress": 70,
+        "actual_progress": 60,
+        "schedule_variance": -10,
+        "critical_path_status": "正常",
+        "forecast_completion_date": "2024-12-31"
+      },
+      "quality_metrics": {
+        "material_purity": 99.5,
+        "energy_density": 295,
+        "test_accuracy": 95,
+        "team_satisfaction": 9.0
+      },
+      "risk_assessment": [
+        {
+          "risk": "材料性能不达标",
+          "probability": "中",
+          "impact": "高",
+          "status": "已识别",
+          "mitigation": "继续优化合成工艺，建立备用方案"
+        }
+      ],
+      "next_month_plans": [
+        "完成循环寿命测试",
+        "优化材料配方提升循环寿命",
+        "进行批量生产测试",
+        "准备专利申请材料"
+      ],
+      "lessons_learned": [
+        "材料合成工艺优化需要更多实验数据",
+        "测试标准需要进一步标准化",
+        "团队专业知识需要持续提升"
+      ]
+    },
+    {
+      "report_id": "MR-2024-003",
+      "project_id": "ROB-2024-001",
+      "project_name": "智能养老服务机器人系统",
+      "report_type": "月报",
+      "report_period": "2024年6月",
+      "start_date": "2024-06-01T00:00:00Z",
+      "end_date": "2024-06-30T00:00:00Z",
+      "created_date": "2024-06-30T00:00:00Z",
+      "created_by": "刘工程师",
+      "status": "已完成",
+      "executive_summary": "本月机器人系统开发进展良好，硬件平台已完成，AI算法开发按计划进行，但情感识别精度仍需提升以满足老年人使用需求。",
+      "key_achievements": [
+        "完成机器人硬件平台设计和制造",
+        "完成基础控制系统开发",
+        "AI情感识别算法框架完成",
+        "语音交互系统基础功能实现"
+      ],
+      "major_milestones": [
+        {
+          "milestone": "机器人原型机完成",
+          "status": "进行中",
+          "progress": 60,
+          "notes": "硬件完成，软件集成进行中"
+        }
+      ],
+      "budget_analysis": {
+        "planned_budget": 3000000,
+        "actual_spent": 1200000,
+        "budget_utilization": 40,
+        "cost_variance": 0,
+        "forecast_completion_cost": 3000000
+      },
+      "schedule_analysis": {
+        "planned_progress": 65,
+        "actual_progress": 60,
+        "schedule_variance": -5,
+        "critical_path_status": "正常",
+        "forecast_completion_date": "2024-11-30"
+      },
+      "quality_metrics": {
+        "hardware_reliability": 95,
+        "ai_accuracy": 75,
+        "user_test_satisfaction": 8.0,
+        "team_satisfaction": 8.8
+      },
+      "risk_assessment": [
+        {
+          "risk": "AI算法精度不足",
+          "probability": "中",
+          "impact": "高",
+          "status": "已识别",
+          "mitigation": "增加训练数据，优化算法模型"
+        }
+      ],
+      "next_month_plans": [
+        "提升AI情感识别算法精度",
+        "完成语音交互系统集成",
+        "进行系统集成测试",
+        "开始用户测试准备"
+      ],
+      "lessons_learned": [
+        "AI算法开发需要更多用户数据",
+        "硬件软件集成需要更多测试时间",
+        "用户体验设计需要更多老年人参与"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  # 主应用服务 - 简化版本
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.deploy
+    container_name: auto-reduce-ai-deploy
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - PYTHONPATH=/app
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Nginx反向代理（可选）
+  nginx:
+    image: nginx:alpine
+    container_name: auto-reduce-nginx-deploy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.deploy.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app
+    restart: unless-stopped
+    profiles:
+      - nginx  # 可选启动

@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识管理系统 - 智能项目管理</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.2em;
+        }
+        
+        .knowledge-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .category-card {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-left: 5px solid #667eea;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .category-icon {
+            font-size: 2.5em;
+            margin-right: 15px;
+        }
+        
+        .category-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .category-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .subcategories {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .subcategory-item {
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid #667eea;
+            transition: all 0.3s ease;
+        }
+        
+        .subcategory-item:hover {
+            background: #f0f2ff;
+            transform: translateX(5px);
+        }
+        
+        .subcategory-name {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .subcategory-desc {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .knowledge-stats {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1em;
+        }
+        
+        .project-selector {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .project-card {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #e9ecef;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            border-color: #667eea;
+            background: #f0f2ff;
+            transform: translateY(-3px);
+        }
+        
+        .project-card.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .project-name {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .project-id {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .project-card.selected .project-id {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .action-buttons {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .knowledge-results {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            display: none;
+        }
+        
+        .knowledge-results.show {
+            display: block;
+        }
+        
+        .knowledge-item {
+            background: #f8f9ff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .knowledge-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .knowledge-content {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .knowledge-categories {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 知识管理系统</h1>
+            <p>智能项目管理 - 知识沉淀与经验总结</p>
+            <p style="margin-top: 10px; color: #888;">基于项目数据自动提取和分类知识资产</p>
+        </div>
+        
+        <div class="knowledge-stats">
+            <h2 style="text-align: center; margin-bottom: 20px; color: #2c3e50;">📊 知识统计概览</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">知识大类</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">知识子类</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">10</div>
+                    <div class="stat-label">项目数量</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="knowledgeItemsCount">0</div>
+                    <div class="stat-label">知识条目</div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 15px; color: #666; font-size: 0.9em;">
+                📁 数据源: knowledge_management.json (独立知识管理数据库)
+            </div>
+        </div>
+        
+        <div class="knowledge-categories">
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">📋</div>
+                    <div class="category-title">项目过程与成果类</div>
+                </div>
+                <div class="category-description">
+                    涵盖项目立项、计划制定、执行记录和成果文档等全生命周期知识
+                </div>
+                <div class="subcategories">
+                    <div class="subcategory-item">
+                        <div class="subcategory-name">立项信息</div>
+                        <div class="subcategory-desc">背景、目标、范围、立项依据、可行性分析</div>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-name">计划与基线</div>
+                        <div class="subcategory-desc">进度计划、成本预算、质量计划、资源计划</div>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-name">执行过程记录</div>
+                        <div class="subcategory-desc">里程碑达成情况、关键活动过程数据、变更记录</div>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-name">成果文档</div>
+                        <div class="subcategory-desc">交付物说明书、用户手册、系统文档、测试报告</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">💡</div>
+                    <div class="category-title">经验与教训类</div>
+                </div>
+                <div class="category-description">
+                    总结项目成功实践、失败案例和改进建议，形成组织智慧
+                </div>
+                <div class="subcategories">
+                    <div class="subcategory-item">
+                        <div class="subcategory-name">成功实践</div>
+                        <div class="subcategory-desc">哪些方法、工具、策略帮助了目标达成</div>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-name">失败/问题案例</div>
+                        <div class="subcategory-desc">风险触发点、缺陷与返工原因、沟通/协作失误</div>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-name">改进建议</div>
+                        <div class="subcategory-desc">如何降低成本、缩短工期、减少风险</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">🤝</div>
+                    <div class="category-title">管理与协同类</div>
+                </div>
+                <div class="category-description">
+                    记录管理决策、沟通机制和协作经验，提升组织协同效率
+                </div>
+                <div class="subcategories">
+                    <div class="subcategory-item">
+                        <div class="subcategory-name">责任矩阵与接口文档</div>
+                        <div class="subcategory-desc">谁负责什么、跨部门接口关系、沟通机制</div>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-name">决策记录</div>
+                        <div class="subcategory-desc">关键决策的背景、讨论要点、最终选择及其理由</div>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-name">沟通记录</div>
+                        <div class="subcategory-desc">重要会议纪要、决策追踪、需求变更确认</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">🛠️</div>
+                    <div class="category-title">知识资产与方法论类</div>
+                </div>
+                <div class="category-description">
+                    沉淀可复用的模板、标准和最佳实践，形成组织知识资产
+                </div>
+                <div class="subcategories">
+                    <div class="subcategory-item">
+                        <div class="subcategory-name">模板与标准</div>
+                        <div class="subcategory-desc">需求文档模板、测试模板、进度报告模板</div>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-name">流程与工具实践</div>
+                        <div class="subcategory-desc">版本控制、自动化测试、敏捷实践、PMIS使用经验</div>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-name">指标与度量</div>
+                        <div class="subcategory-desc">工期偏差率、成本偏差率、缺陷率、满意度等关键指标</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">🏢</div>
+                    <div class="category-title">组织层面价值信息</div>
+                </div>
+                <div class="category-description">
+                    形成组织级知识库，提升整体能力和竞争力
+                </div>
+                <div class="subcategories">
+                    <div class="subcategory-item">
+                        <div class="subcategory-name">可复用知识</div>
+                        <div class="subcategory-desc">行业解决方案、技术架构、接口规范</div>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-name">能力成熟度沉淀</div>
+                        <div class="subcategory-desc">项目管理最佳实践库、经验教训库、专家经验</div>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-name">知识共享与培训材料</div>
+                        <div class="subcategory-desc">项目总结分享会内容、内部培训课件、FAQ</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="project-selector">
+            <h2 style="text-align: center; margin-bottom: 20px; color: #2c3e50;">🎯 选择项目进行知识汇总</h2>
+            <div class="project-grid">
+                <div class="project-card" onclick="selectProject(this, 'PRJ-2024-001')">
+                    <div class="project-name">智能管理系统开发项目</div>
+                    <div class="project-id">PRJ-2024-001</div>
+                </div>
+                <div class="project-card" onclick="selectProject(this, 'BAT-2024-001')">
+                    <div class="project-name">高能量密度锂离子电池正极材料研发</div>
+                    <div class="project-id">BAT-2024-001</div>
+                </div>
+                <div class="project-card" onclick="selectProject(this, 'ROB-2024-001')">
+                    <div class="project-name">智能养老服务机器人系统</div>
+                    <div class="project-id">ROB-2024-001</div>
+                </div>
+                <div class="project-card" onclick="selectProject(this, 'all')">
+                    <div class="project-name">所有项目知识汇总</div>
+                    <div class="project-id">全部项目</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button class="btn" onclick="generateKnowledge()">🧠 生成知识汇总</button>
+            <button class="btn btn-secondary" onclick="viewSavedKnowledge()">📚 查看已保存知识</button>
+            <button class="btn btn-secondary" onclick="exportKnowledge()">📤 导出知识库</button>
+            <button class="btn btn-secondary" onclick="refreshData()">🔄 刷新数据</button>
+        </div>
+        
+        <div class="knowledge-results" id="knowledgeResults">
+            <h2 style="text-align: center; margin-bottom: 20px; color: #2c3e50;">📚 知识汇总结果</h2>
+            <div id="knowledgeContent">
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>正在生成知识汇总，请稍候...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let selectedProject = null;
+        
+        function selectProject(element, projectId) {
+            // 移除所有选中状态
+            document.querySelectorAll('.project-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // 添加选中状态
+            element.classList.add('selected');
+            selectedProject = projectId;
+        }
+        
+        async function generateKnowledge() {
+            if (!selectedProject) {
+                alert('请先选择一个项目！');
+                return;
+            }
+            
+            const resultsDiv = document.getElementById('knowledgeResults');
+            const contentDiv = document.getElementById('knowledgeContent');
+            
+            resultsDiv.classList.add('show');
+            contentDiv.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>正在生成知识汇总，请稍候...</p>
+                </div>
+            `;
+            
+            try {
+                const response = await fetch('http://localhost:8000/api/v1/auto-reduce/intelligent-chat/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: '进行知识管理汇总',
+                        session_id: 'knowledge_' + Date.now()
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.code === 200) {
+                    contentDiv.innerHTML = `
+                        <div class="knowledge-item">
+                            <div class="knowledge-title">📊 知识汇总结果</div>
+                            <div class="knowledge-content">${data.data.response.replace(/\n/g, '<br>')}</div>
+                        </div>
+                    `;
+                    
+                    // 刷新知识统计信息
+                    loadKnowledgeStats();
+                } else {
+                    contentDiv.innerHTML = `
+                        <div class="knowledge-item">
+                            <div class="knowledge-title">❌ 生成失败</div>
+                            <div class="knowledge-content">${data.message || '未知错误'}</div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                contentDiv.innerHTML = `
+                    <div class="knowledge-item">
+                        <div class="knowledge-title">❌ 网络错误</div>
+                        <div class="knowledge-content">无法连接到服务器，请检查网络连接</div>
+                    </div>
+                `;
+            }
+        }
+        
+        function exportKnowledge() {
+            alert('知识库导出功能开发中...');
+        }
+        
+        function refreshData() {
+            location.reload();
+        }
+        
+        async function viewSavedKnowledge() {
+            const resultsDiv = document.getElementById('knowledgeResults');
+            const contentDiv = document.getElementById('knowledgeContent');
+            
+            resultsDiv.classList.add('show');
+            contentDiv.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>正在加载已保存的知识条目...</p>
+                </div>
+            `;
+            
+            try {
+                const response = await fetch('knowledge_management.json');
+                const data = await response.json();
+                
+                let html = '<div class="knowledge-item">';
+                html += '<div class="knowledge-title">📚 已保存的知识条目</div>';
+                html += '<div class="knowledge-content">';
+                
+                // 显示数据库信息
+                const dbInfo = data.knowledge_database;
+                html += `<h3>📁 知识管理数据库信息</h3>`;
+                html += `<p><strong>版本:</strong> ${dbInfo.version}</p>`;
+                html += `<p><strong>创建时间:</strong> ${dbInfo.created_date}</p>`;
+                html += `<p><strong>最后更新:</strong> ${dbInfo.last_updated}</p>`;
+                html += `<p><strong>描述:</strong> ${dbInfo.description}</p>`;
+                
+                // 显示统计信息
+                const stats = data.knowledge_statistics;
+                html += `<h3>📊 知识统计信息</h3>`;
+                html += `<p><strong>知识大类:</strong> ${stats.total_categories}个</p>`;
+                html += `<p><strong>知识子类:</strong> ${stats.total_subcategories}个</p>`;
+                html += `<p><strong>项目数量:</strong> ${stats.total_projects}个</p>`;
+                html += `<p><strong>知识条目:</strong> ${stats.total_knowledge_items}条</p>`;
+                
+                // 显示项目知识
+                html += `<h3>📋 项目知识条目</h3>`;
+                for (const [projectId, projectData] of Object.entries(data.knowledge_projects)) {
+                    html += `<div style="margin: 20px 0; padding: 15px; background: #f8f9ff; border-radius: 10px;">`;
+                    html += `<h4>${projectData.project_name} (${projectId})</h4>`;
+                    html += `<p><strong>提取状态:</strong> ${projectData.knowledge_summary.extraction_status}</p>`;
+                    html += `<p><strong>知识条目数:</strong> ${projectData.knowledge_summary.total_knowledge_items}</p>`;
+                    html += `<p><strong>最后提取时间:</strong> ${projectData.knowledge_summary.last_extraction_date || '未提取'}</p>`;
+                    
+                    // 显示知识分类
+                    if (projectData.knowledge_by_category) {
+                        html += `<h5>知识分类:</h5>`;
+                        for (const [category, items] of Object.entries(projectData.knowledge_by_category)) {
+                            if (Array.isArray(items) && items.length > 0) {
+                                html += `<p>• ${category}: ${items.length}条</p>`;
+                            }
+                        }
+                    }
+                    html += `</div>`;
+                }
+                
+                html += '</div></div>';
+                contentDiv.innerHTML = html;
+                
+            } catch (error) {
+                contentDiv.innerHTML = `
+                    <div class="knowledge-item">
+                        <div class="knowledge-title">❌ 加载失败</div>
+                        <div class="knowledge-content">无法加载知识管理数据库: ${error.message}</div>
+                    </div>
+                `;
+            }
+        }
+        
+        // 加载知识管理数据库统计信息
+        async function loadKnowledgeStats() {
+            try {
+                const response = await fetch('knowledge_management.json');
+                const data = await response.json();
+                
+                const stats = data.knowledge_statistics;
+                document.getElementById('knowledgeItemsCount').textContent = stats.total_knowledge_items;
+                
+                // 更新数据库信息
+                const dbInfo = data.knowledge_database;
+                console.log('知识管理数据库版本:', dbInfo.version);
+                console.log('最后更新时间:', dbInfo.last_updated);
+                
+            } catch (error) {
+                console.error('加载知识管理数据库失败:', error);
+            }
+        }
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('知识管理系统页面已加载');
+            loadKnowledgeStats();
+        });
+    </script>
+</body>
+</html>

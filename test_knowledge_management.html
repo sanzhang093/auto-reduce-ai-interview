@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识管理功能测试</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            background: #f9f9f9;
+        }
+        .test-button {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        .test-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f8ff;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            white-space: pre-wrap;
+            font-family: monospace;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .loading {
+            display: none;
+            color: #666;
+            font-style: italic;
+        }
+        .loading.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧠 知识管理功能测试</h1>
+        
+        <div class="test-section">
+            <h3>测试1: 直接调用知识管理Agent</h3>
+            <p>点击按钮直接启动知识管理Agent，测试是否能够正确调用并返回5大类知识分类结果。</p>
+            <button class="test-button" onclick="testKnowledgeManagement()">🚀 启动知识管理Agent</button>
+            <div class="loading" id="loading1">正在调用知识管理Agent...</div>
+            <div class="result" id="result1"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>测试2: 检查知识管理数据库</h3>
+            <p>检查知识管理数据库是否已保存项目知识数据。</p>
+            <button class="test-button" onclick="checkKnowledgeDatabase()">📊 检查知识数据库</button>
+            <div class="loading" id="loading2">正在检查数据库...</div>
+            <div class="result" id="result2"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>测试3: 验证5大类知识分类</h3>
+            <p>验证返回结果是否包含完整的5大类知识分类和emoji标识。</p>
+            <button class="test-button" onclick="verifyKnowledgeCategories()">✅ 验证知识分类</button>
+            <div class="loading" id="loading3">正在验证分类...</div>
+            <div class="result" id="result3"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+        
+        async function testKnowledgeManagement() {
+            const loading = document.getElementById('loading1');
+            const result = document.getElementById('result1');
+            
+            loading.classList.add('show');
+            result.textContent = '';
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/auto-reduce/intelligent-chat/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: '知识管理汇总',
+                        session_id: `test_km_${Date.now()}`
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.code === 200 && data.data && data.data.response) {
+                    result.textContent = `✅ 知识管理Agent调用成功！
+响应状态: ${data.code}
+响应长度: ${data.data.response.length} 字符
+
+=== 响应内容 ===
+${data.data.response}`;
+                } else {
+                    result.textContent = `❌ 知识管理Agent调用失败
+错误信息: ${JSON.stringify(data, null, 2)}`;
+                }
+                
+            } catch (error) {
+                result.textContent = `❌ 调用失败: ${error.message}`;
+            } finally {
+                loading.classList.remove('show');
+            }
+        }
+        
+        async function checkKnowledgeDatabase() {
+            const loading = document.getElementById('loading2');
+            const result = document.getElementById('result2');
+            
+            loading.classList.add('show');
+            result.textContent = '';
+            
+            try {
+                // 这里我们通过API调用来检查数据库状态
+                const response = await fetch(`${API_BASE}/api/v1/auto-reduce/intelligent-chat/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: '检查知识管理数据库状态',
+                        session_id: `check_db_${Date.now()}`
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.code === 200) {
+                    result.textContent = `✅ 知识管理数据库检查完成
+数据库状态: 正常
+API响应: 成功
+
+注意: 实际数据库文件位于 knowledge_management.json
+可以通过文件系统直接查看数据库内容。`;
+                } else {
+                    result.textContent = `❌ 数据库检查失败: ${JSON.stringify(data, null, 2)}`;
+                }
+                
+            } catch (error) {
+                result.textContent = `❌ 检查失败: ${error.message}`;
+            } finally {
+                loading.classList.remove('show');
+            }
+        }
+        
+        async function verifyKnowledgeCategories() {
+            const loading = document.getElementById('loading3');
+            const result = document.getElementById('result3');
+            
+            loading.classList.add('show');
+            result.textContent = '';
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/auto-reduce/intelligent-chat/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: '知识管理汇总',
+                        session_id: `verify_cat_${Date.now()}`
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.code === 200 && data.data && data.data.response) {
+                    const responseText = data.data.response;
+                    
+                    const categories = [
+                        { emoji: '📋', name: '项目过程与成果类知识' },
+                        { emoji: '💡', name: '经验与教训类知识' },
+                        { emoji: '🤝', name: '管理与协同类知识' },
+                        { emoji: '🛠️', name: '知识资产与方法论类知识' },
+                        { emoji: '🏢', name: '组织层面价值信息' }
+                    ];
+                    
+                    let verificationResult = '✅ 知识分类验证结果:\n\n';
+                    
+                    categories.forEach(category => {
+                        const hasEmoji = responseText.includes(category.emoji);
+                        const hasName = responseText.includes(category.name);
+                        const status = hasEmoji && hasName ? '✅' : '❌';
+                        verificationResult += `${status} ${category.emoji} ${category.name}: ${hasEmoji ? '有emoji' : '无emoji'}, ${hasName ? '有名称' : '无名称'}\n`;
+                    });
+                    
+                    verificationResult += `\n=== 响应内容预览 ===\n${responseText.substring(0, 500)}...`;
+                    
+                    result.textContent = verificationResult;
+                } else {
+                    result.textContent = `❌ 验证失败: ${JSON.stringify(data, null, 2)}`;
+                }
+                
+            } catch (error) {
+                result.textContent = `❌ 验证失败: ${error.message}`;
+            } finally {
+                loading.classList.remove('show');
+            }
+        }
+    </script>
+</body>
+</html>

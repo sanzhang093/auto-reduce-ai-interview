@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目甘特图可视化</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.2em;
+        }
+        
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .chart-title {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .mermaid {
+            text-align: center;
+        }
+        
+        .project-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .info-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .info-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            padding: 5px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            color: #495057;
+        }
+        
+        .info-value {
+            color: #6c757d;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-in-progress {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-pending {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        .legend-completed {
+            background: #28a745;
+        }
+        
+        .legend-in-progress {
+            background: #ffc107;
+        }
+        
+        .legend-pending {
+            background: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 项目甘特图可视化</h1>
+            <p>智能项目管理 - 实时进度跟踪</p>
+        </div>
+        
+        <div class="controls">
+            <button class="btn" onclick="loadGanttData()">🔄 刷新数据</button>
+            <button class="btn" onclick="exportChart()">📤 导出图表</button>
+            <button class="btn" onclick="toggleFullscreen()">🔍 全屏查看</button>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color legend-completed"></div>
+                <span>已完成</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-in-progress"></div>
+                <span>进行中</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-pending"></div>
+                <span>未开始</span>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <div class="chart-title">硅基负极材料产业化项目甘特图</div>
+            <div class="mermaid" id="gantt-chart">
+                gantt
+                    title 硅基负极材料产业化项目进度
+                    dateFormat  YYYY-MM-DD
+                    section 需求分析阶段
+                    市场需求调研    :done, task1, 2024-03-01, 2024-03-12
+                    技术可行性分析  :done, task2, 2024-03-13, 2024-03-28
+                    section 系统设计阶段
+                    工艺流程设计    :active, task3, 2024-04-01, 2024-04-30
+                    设备选型与配置  :active, task4, 2024-05-01, 2024-05-31
+                    section 实施阶段
+                    生产线建设      :task5, 2024-06-01, 2024-09-30
+                    设备安装调试    :task6, 2024-10-01, 2024-12-31
+            </div>
+        </div>
+        
+        <div class="project-info">
+            <div class="info-card">
+                <h3>📋 项目基本信息</h3>
+                <div class="info-item">
+                    <span class="info-label">项目名称:</span>
+                    <span class="info-value">硅基负极材料产业化项目</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">项目代码:</span>
+                    <span class="info-value">BAT-2024-002</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">方法论:</span>
+                    <span class="info-value">瀑布模型</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">项目经理:</span>
+                    <span class="info-value">李工程师</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">预算:</span>
+                    <span class="info-value">¥2,000,000</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">已支出:</span>
+                    <span class="info-value">¥450,000</span>
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <h3>📈 进度统计</h3>
+                <div class="info-item">
+                    <span class="info-label">需求分析阶段:</span>
+                    <span class="status-badge status-completed">已完成</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%"></div>
+                </div>
+                
+                <div class="info-item">
+                    <span class="info-label">系统设计阶段:</span>
+                    <span class="status-badge status-in-progress">进行中</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 75%"></div>
+                </div>
+                
+                <div class="info-item">
+                    <span class="info-label">实施阶段:</span>
+                    <span class="status-badge status-pending">未开始</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <h3>🎯 关键指标</h3>
+                <div class="info-item">
+                    <span class="info-label">整体进度:</span>
+                    <span class="info-value">58.3%</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">预算使用率:</span>
+                    <span class="info-value">22.5%</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">时间偏差:</span>
+                    <span class="info-value">-3天</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">风险等级:</span>
+                    <span class="info-value">中等</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">质量评分:</span>
+                    <span class="info-value">85/100</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <div class="chart-title">智能养老服务机器人系统甘特图</div>
+            <div class="mermaid" id="robot-gantt">
+                gantt
+                    title 智能养老服务机器人系统进度
+                    dateFormat  YYYY-MM-DD
+                    section Sprint 1 - 基础平台
+                    硬件平台设计    :done, robot1, 2024-01-01, 2024-01-25
+                    基础控制系统    :done, robot2, 2024-01-15, 2024-01-28
+                    section Sprint 2 - 感知系统
+                    视觉识别系统    :done, robot3, 2024-01-29, 2024-02-25
+                    传感器集成      :done, robot4, 2024-02-05, 2024-02-25
+                    section Sprint 3 - AI交互
+                    AI情感识别      :active, robot5, 2024-02-26, 2024-03-25
+                    语音交互系统    :active, robot6, 2024-03-05, 2024-03-25
+                    section Sprint 4 - 集成测试
+                    系统集成测试    :robot7, 2024-03-26, 2024-04-22
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 初始化Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            gantt: {
+                axisFormat: '%m/%d',
+                tickInterval: '1month'
+            }
+        });
+        
+        // 加载甘特图数据
+        async function loadGanttData() {
+            try {
+                const response = await fetch('http://localhost:8000/api/v1/auto-reduce/intelligent-chat/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: "生成甘特图可视化数据",
+                        session_id: "gantt_visualization"
+                    })
+                });
+                
+                const data = await response.json();
+                if (data.code === 200) {
+                    console.log('甘特图数据加载成功:', data.data.response);
+                    // 这里可以更新图表数据
+                }
+            } catch (error) {
+                console.error('加载甘特图数据失败:', error);
+            }
+        }
+        
+        // 导出图表
+        function exportChart() {
+            const charts = document.querySelectorAll('.mermaid');
+            charts.forEach((chart, index) => {
+                const svg = chart.querySelector('svg');
+                if (svg) {
+                    const svgData = new XMLSerializer().serializeToString(svg);
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    const img = new Image();
+                    
+                    img.onload = function() {
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        ctx.drawImage(img, 0, 0);
+                        
+                        const link = document.createElement('a');
+                        link.download = `gantt_chart_${index + 1}.png`;
+                        link.href = canvas.toDataURL();
+                        link.click();
+                    };
+                    
+                    img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
+                }
+            });
+        }
+        
+        // 全屏查看
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('甘特图可视化页面已加载');
+        });
+    </script>
+</body>
+</html>

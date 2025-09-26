@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI管理辅助系统 - 智能管理平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .status-bar {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .status-item {
+            display: inline-block;
+            margin: 0 20px;
+            text-align: center;
+        }
+
+        .status-item .icon {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .status-item .label {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .status-item .value {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+            font-size: 2em;
+            margin-right: 15px;
+            color: #667eea;
+        }
+
+        .card-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .card-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .result-area {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            display: none;
+        }
+
+        .result-area.show {
+            display: block;
+        }
+
+        .result-content {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            border-left: 4px solid #667eea;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            opacity: 0.8;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .quick-actions .btn {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .status-item {
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 AI管理辅助系统</h1>
+            <p>智能项目管理平台 - 让AI帮您减负增效</p>
+        </div>
+
+        <div class="status-bar">
+            <div class="status-item">
+                <div class="icon">🟢</div>
+                <div class="label">服务状态</div>
+                <div class="value" id="serviceStatus">检查中...</div>
+            </div>
+            <div class="status-item">
+                <div class="icon">📊</div>
+                <div class="label">项目数量</div>
+                <div class="value" id="projectCount">-</div>
+            </div>
+            <div class="status-item">
+                <div class="icon">✅</div>
+                <div class="label">任务数量</div>
+                <div class="value" id="taskCount">-</div>
+            </div>
+            <div class="status-item">
+                <div class="icon">⚡</div>
+                <div class="label">响应时间</div>
+                <div class="value" id="responseTime">-</div>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <!-- 项目管理 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📋</div>
+                    <div class="card-title">项目管理</div>
+                </div>
+                <div class="card-description">
+                    查看和管理您的项目，包括项目列表、任务分配和进度跟踪。
+                </div>
+                <div class="quick-actions">
+                    <button class="btn" onclick="loadProjects()">📊 项目列表</button>
+                    <button class="btn btn-secondary" onclick="loadTasks()">✅ 任务列表</button>
+                </div>
+            </div>
+
+            <!-- 自动减负 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🤖</div>
+                    <div class="card-title">自动减负</div>
+                </div>
+                <div class="card-description">
+                    AI驱动的自动化功能，帮您自动提取任务、生成报告、监控风险。
+                </div>
+                <div class="quick-actions">
+                    <button class="btn btn-success" onclick="extractTasks()">📝 提取任务</button>
+                    <button class="btn btn-warning" onclick="generateReport('PRJ-001')">📊 生成日报</button>
+                </div>
+            </div>
+
+            <!-- AI智能 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🧠</div>
+                    <div class="card-title">AI智能</div>
+                </div>
+                <div class="card-description">
+                    与AI进行智能对话，获取项目建议，分析数据趋势。
+                </div>
+                <div class="quick-actions">
+                    <button class="btn" onclick="chatWithAI()">💬 AI对话</button>
+                    <button class="btn btn-secondary" onclick="analyzeTrends('PRJ-001')">📈 趋势分析</button>
+                </div>
+            </div>
+
+            <!-- 风险监控 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">⚠️</div>
+                    <div class="card-title">风险监控</div>
+                </div>
+                <div class="card-description">
+                    自动扫描项目风险，提供预警和缓解建议。
+                </div>
+                <div class="quick-actions">
+                    <button class="btn btn-warning" onclick="scanRisks('PRJ-001')">🔍 扫描风险</button>
+                    <button class="btn" onclick="generateSummaryReport('PRJ-001')">📋 汇总报表</button>
+                </div>
+            </div>
+
+            <!-- 系统监控 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">⚙️</div>
+                    <div class="card-title">系统监控</div>
+                </div>
+                <div class="card-description">
+                    查看系统运行状态、缓存使用情况和性能指标。
+                </div>
+                <div class="quick-actions">
+                    <button class="btn" onclick="checkSystemHealth()">💚 系统健康</button>
+                    <button class="btn btn-secondary" onclick="getCacheStats()">💾 缓存统计</button>
+                </div>
+            </div>
+
+            <!-- 快速操作 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">⚡</div>
+                    <div class="card-title">快速操作</div>
+                </div>
+                <div class="card-description">
+                    常用功能的快速访问入口。
+                </div>
+                <div class="quick-actions">
+                    <button class="btn" onclick="refreshAll()">🔄 刷新全部</button>
+                    <button class="btn btn-success" onclick="openAPIDocs()">📚 API文档</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <div>正在处理请求...</div>
+        </div>
+
+        <div class="result-area" id="resultArea">
+            <h3>📊 执行结果</h3>
+            <div class="result-content" id="resultContent"></div>
+        </div>
+
+        <div class="footer">
+            <p>© 2024 AI管理辅助系统 | 让AI帮您减负增效</p>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+        
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            checkServiceHealth();
+            loadProjects();
+            loadTasks();
+        });
+
+        // 显示加载状态
+        function showLoading() {
+            document.getElementById('loading').classList.add('show');
+            document.getElementById('resultArea').classList.remove('show');
+        }
+
+        // 隐藏加载状态
+        function hideLoading() {
+            document.getElementById('loading').classList.remove('show');
+        }
+
+        // 显示结果
+        function showResult(data, title = '执行结果') {
+            hideLoading();
+            const resultArea = document.getElementById('resultArea');
+            const resultContent = document.getElementById('resultContent');
+            
+            resultContent.textContent = JSON.stringify(data, null, 2);
+            resultArea.classList.add('show');
+            
+            // 滚动到结果区域
+            resultArea.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 检查服务健康状态
+        async function checkServiceHealth() {
+            try {
+                const startTime = Date.now();
+                const response = await fetch(`${API_BASE}/health`);
+                const endTime = Date.now();
+                const responseTime = endTime - startTime;
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('serviceStatus').textContent = '正常运行';
+                    document.getElementById('responseTime').textContent = `${responseTime}ms`;
+                } else {
+                    document.getElementById('serviceStatus').textContent = '异常';
+                }
+            } catch (error) {
+                document.getElementById('serviceStatus').textContent = '离线';
+                console.error('健康检查失败:', error);
+            }
+        }
+
+        // 加载项目列表
+        async function loadProjects() {
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/projects`);
+                const data = await response.json();
+                
+                if (data.code === 200) {
+                    document.getElementById('projectCount').textContent = data.data.length;
+                    showResult(data, '项目列表');
+                } else {
+                    showResult(data, '错误');
+                }
+            } catch (error) {
+                showResult({ error: error.message }, '错误');
+            }
+        }
+
+        // 加载任务列表
+        async function loadTasks() {
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/tasks`);
+                const data = await response.json();
+                
+                if (data.code === 200) {
+                    document.getElementById('taskCount').textContent = data.data.length;
+                    showResult(data, '任务列表');
+                } else {
+                    showResult(data, '错误');
+                }
+            } catch (error) {
+                showResult({ error: error.message }, '错误');
+            }
+        }
+
+        // 提取任务
+        async function extractTasks() {
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/auto-reduce/task-capture/meeting`);
+                const data = await response.json();
+                showResult(data, '任务提取结果');
+            } catch (error) {
+                showResult({ error: error.message }, '错误');
+            }
+        }
+
+        // 生成日报
+        async function generateReport(projectId) {
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/auto-reduce/progress-summary/daily/${projectId}`);
+                const data = await response.json();
+                showResult(data, '项目日报');
+            } catch (error) {
+                showResult({ error: error.message }, '错误');
+            }
+        }
+
+        // AI对话
+        async function chatWithAI() {
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/auto-reduce/intelligent-chat/chat`);
+                const data = await response.json();
+                showResult(data, 'AI对话结果');
+            } catch (error) {
+                showResult({ error: error.message }, '错误');
+            }
+        }
+
+        // 趋势分析
+        async function analyzeTrends(projectId) {
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/auto-reduce/ai-analysis/trends/${projectId}`);
+                const data = await response.json();
+                showResult(data, '趋势分析结果');
+            } catch (error) {
+                showResult({ error: error.message }, '错误');
+            }
+        }
+
+        // 扫描风险
+        async function scanRisks(projectId) {
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/auto-reduce/risk-monitoring/scan/${projectId}`);
+                const data = await response.json();
+                showResult(data, '风险扫描结果');
+            } catch (error) {
+                showResult({ error: error.message }, '错误');
+            }
+        }
+
+        // 生成汇总报表
+        async function generateSummaryReport(projectId) {
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/auto-reduce/reports/project-summary/${projectId}`);
+                const data = await response.json();
+                showResult(data, '汇总报表');
+            } catch (error) {
+                showResult({ error: error.message }, '错误');
+            }
+        }
+
+        // 检查系统健康
+        async function checkSystemHealth() {
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/auto-reduce/monitoring/health`);
+                const data = await response.json();
+                showResult(data, '系统健康状态');
+            } catch (error) {
+                showResult({ error: error.message }, '错误');
+            }
+        }
+
+        // 获取缓存统计
+        async function getCacheStats() {
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/auto-reduce/cache/stats`);
+                const data = await response.json();
+                showResult(data, '缓存统计');
+            } catch (error) {
+                showResult({ error: error.message }, '错误');
+            }
+        }
+
+        // 刷新全部
+        async function refreshAll() {
+            showLoading();
+            await checkServiceHealth();
+            await loadProjects();
+            await loadTasks();
+            hideLoading();
+            showResult({ message: '所有数据已刷新' }, '刷新完成');
+        }
+
+        // 打开API文档
+        function openAPIDocs() {
+            window.open(`${API_BASE}/docs`, '_blank');
+        }
+    </script>
+</body>
+</html>

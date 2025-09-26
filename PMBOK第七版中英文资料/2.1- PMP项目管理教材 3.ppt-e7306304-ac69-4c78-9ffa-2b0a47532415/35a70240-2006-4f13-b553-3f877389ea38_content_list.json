@@ -1,0 +1,1700 @@
+[
+    {
+        "type": "text",
+        "text": "项目管理",
+        "text_level": 1,
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "课程目标",
+        "text_level": 1,
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• 系统了解项目管理理论\n• 熟悉项目管理概念\n• 初步掌握项目管理过程和技巧\n• 通过项目实际案例领会项目管理的思想\n• 用项目管理的方法来指导项目实践\n• 交流项目管理经验",
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "学习方式",
+        "text_level": 1,
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• 个人",
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "— 提问",
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "— 经验交流",
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "— 教训",
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• 分组（选出项目经理，保证成员的差异性）",
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "— 讨论",
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "— 模拟",
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• 案例学习",
+        "page_idx": 2
+    },
+    {
+        "type": "image",
+        "img_path": "images/bdd25eaad1eace683376630e1dc4eb9cb3db4b27bfe79e327bedede81fd68b92.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "讲课提纲",
+        "text_level": 1,
+        "page_idx": 3
+    },
+    {
+        "type": "image",
+        "img_path": "images/167cde0e5d895a6480268a4dc66dc750b23030c498c9076a17277fe3ab82c6c5.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "• 第二天上午:",
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "— 项目成本管理",
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "— 项目沟通管理",
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "— 项目人员管理",
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "— 团队建设、高效个人",
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "• 第二天下午:",
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "— 项目风险管理",
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "— 项目质量管理",
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "— 项目综合管理",
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "— 项目经理",
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "— 项目管理工具",
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "— 总结, 书籍、资源推荐",
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "变化是永恒的!",
+        "text_level": 1,
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "• 20 世纪 60 年代: 大规模生产, 重在产量;\n• 20 世纪 70 年代: 质量管理, 强调产品一致性;\n• 20 世纪 80 年代: 产品多样性;\n• 20 世纪 90 年代: 客户化定制服务或者产品;\n• 当前: 客户驱动、业务基于项目、挑战变化。。。环境的变化引发对业务模式、管理模式、人才与资源利用的思考。",
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "职能型组织",
+        "text_level": 1,
+        "page_idx": 5
+    },
+    {
+        "type": "image",
+        "img_path": "images/ac5660551753b68bd9bd5400f8da268d59b759bad4b061121b1dc69941d38360.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "源：Rodney Turner 教授",
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "项目型组织",
+        "text_level": 1,
+        "page_idx": 6
+    },
+    {
+        "type": "image",
+        "img_path": "images/c3efe1867e94ab35e048b6b100881401f22479910dbc7d1b94c5779f22d36932.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "源：Rodney Turner 教授",
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "项目管理基本过程（示例）",
+        "text_level": 1,
+        "page_idx": 7
+    },
+    {
+        "type": "image",
+        "img_path": "images/f2eeae463a408321a55931c5df0a6d8cbb7a6ee1472704dd9248387d132a4581.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "PRINCE 2 项目管理过程",
+        "text_level": 1,
+        "page_idx": 8
+    },
+    {
+        "type": "image",
+        "img_path": "images/2d0ac3f3331b95e6627e6808346f16bccb6a286403cd1658abb40e3060143ff2.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "为什么需要项目管理（1）",
+        "text_level": 1,
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "• 市场竞争的要求:",
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "- 更快, 更好, 更低廉 (Better, Faster, Cheaper)\n- 变化的内外部环境",
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "人类知识的指数性增长, 全球专业化分工越来越细, 项目所提供的产品或服务也越来越复杂",
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "- 合同项目管理和外包 (Outsourcing)",
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "- 多兵种协同作战, 对项目管理提出挑战",
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "- 面临来自世界范围内的竞争",
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "- 商业战略的实现越来越多的依靠一个个项目的成败",
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "- EPM (企业级项目管理) 概念的流行",
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "为什么需要项目管理（2）",
+        "text_level": 1,
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "• 越来越少的项目只需要单一资源就可以成功；\n• 越来越少的项目只需要个人，而不是一个团队就可以成功。\n• 项目有其独特性，但是内外部环境要求我们“做一次，一次就要成功！”\n• 一需要项目管理有效的组织和协调\n• 一需要项目管理充分利用现有资源和历史经验与教训",
+        "page_idx": 10
+    },
+    {
+        "type": "image",
+        "img_path": "images/2fddaa84422fdd33342f41850a6ca7c2da25d7903fc747ae0b0818537a94b404.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "项目管理在国外的发展",
+        "text_level": 1,
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "- 长期以来，发达国家在推动项目管理发展中大受裨益",
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "— 美国政府性科研项目、军事项目得益于系统工程",
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "— NASA（航空航天项目）",
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "— SEI（国家软件采购项目质量标准制定）",
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "— 欧洲则发源于建筑、工程项目管理",
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "— 殊途同归，美洲和欧洲的项目管理在理念上是相通的",
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "- 标准化：项目管理的最佳实践总结，为组织、团队、个人提供实践指导；",
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "— PMI、IPMA、APM 都有自己的“PMBOK”和认证；",
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "- 职业化：项目管理逐渐成为一个职业，产业界需要具有项目管理基本素质的人员担当项目管理工作。",
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "项目管理已经成为WTO时代的共同语言",
+        "text_level": 1,
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "软件、IT 行业:",
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "- Microsoft;- IBM;- 惠普;- Dell。",
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "制造业:",
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "- 摩托罗拉;\n- 柯达;\n- 福特汽车。",
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "电信行业:",
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "- AT&T;- 朗讯科技;- 诺基亚。",
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "建筑、工程行业:",
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "- Bochtol;- Chevron;- 美国军方工程公司。",
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "源: 美国著名大学 Berkeley 项目管理研究中心",
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "美国项目管理学会 (PMI)",
+        "text_level": 1,
+        "page_idx": 13
+    },
+    {
+        "type": "image",
+        "img_path": "images/d380d29b29604460ea8bd8e492d9d8d22e3d68b5814d00677093c737b486dde2.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 13
+    },
+    {
+        "type": "image",
+        "img_path": "images/c83d61a76c83452493b785eb2f7079bc4d31c8345830fcb32532e2d8893c22fd.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "项目管理在国内的发展",
+        "text_level": 1,
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "• 其重要性逐渐被国人所认识（从组织到个人）：迫于市场竞争的压力（更快、更好、更低廉）",
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "项目管理知识和最佳实践有待普及",
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "• 项目管理符合朴素的通用管理理念；\n• 无论是传统行业，还是新兴行业；\n• 项目管理的知识、技能成为职业培训的重要组成部分。",
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "• PMP 认证在 2000 年突然升温，培训市场迅速膨胀",
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "• IPMP 认证从 2001 开始",
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "• 劳动部推行 “项目管理师” 资质认证",
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "• 国内各行业人士渴望接受项目管理的培训、并用之于实践中",
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "项目管理，从哪里入手？",
+        "page_idx": 15
+    },
+    {
+        "type": "image",
+        "img_path": "images/b6f36f852fa18961168bc93db986642b2602623df406841d92d3fbfe01f98f55.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 15
+    },
+    {
+        "type": "text",
+        "text": "项目管理概述",
+        "text_level": 1,
+        "page_idx": 16
+    },
+    {
+        "type": "text",
+        "text": "• 项目和项目管理的基本概念\n• 项目干系人\n• 项目的组织构架\n• 项目的生命期\n• 项目管理过程",
+        "page_idx": 16
+    },
+    {
+        "type": "text",
+        "text": "项目的定义",
+        "text_level": 1,
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "什么是项目?",
+        "page_idx": 17
+    },
+    {
+        "type": "image",
+        "img_path": "images/f4a9ac2315b6c6e1c756afefa3bb249f9ea064f9ed35da76e7b3b4942f65bb66.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "项目的特",
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "一次性, 有始有终;",
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "可交付成果 (Deliverable) 具有独特性;",
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "实现某个具体的目标;",
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "项目受到一些约束;",
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "项目是由人执行;",
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "分阶段、滚动式的管理方法;",
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "经常跨越组织边界;",
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "通过计划和控制来防止失败。",
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "源: PMBOK2000",
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "项目的三个约束条件",
+        "text_level": 1,
+        "page_idx": 18
+    },
+    {
+        "type": "image",
+        "img_path": "images/3ad5634915025fccc35cb7fd041847a0aa82be1e584ce78f4bfb853a6ca9d5cc.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 18
+    },
+    {
+        "type": "text",
+        "text": "例：新产品开发速度与经济收益",
+        "page_idx": 19
+    },
+    {
+        "type": "image",
+        "img_path": "images/f1dee02c8c37a84b48b62df3764389446378bc42439d72b1a951c1a0e1f4f4a9.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 19
+    },
+    {
+        "type": "text",
+        "text": "进入项目时代",
+        "text_level": 1,
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "• 建立一个新企业\n• 开发一个新产品\n• 实施一项新工程\n• 规划一项新活动",
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "考考你：",
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "这些活动哪些是项目？",
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "哪些不是项目？",
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "举办一次招商引资大会一次与投资商的合作谈判",
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "可行性调研与分析",
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "油田开发",
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "举办奥运会",
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "开一次专题会议",
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "惠普与康柏机构重组",
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "生产线产品制造",
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "新工艺的实施",
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "建立人员激励机制",
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "PM培训",
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "家庭购房",
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "子女培养",
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "项目与运作（Operation）的关系",
+        "page_idx": 21
+    },
+    {
+        "type": "image",
+        "img_path": "images/15360ce93ea7da5ee60f43725108c1be42bca68bc1deb2e7d8397f3dcf518e87.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 21
+    },
+    {
+        "type": "image",
+        "img_path": "images/56902beec421dc0b30ab125fd7c985daed984420a2a1ef86cd974afc9528d02c.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 21
+    },
+    {
+        "type": "text",
+        "text": "由人来实施，受制于有限的资源需要计划、实施和控制",
+        "page_idx": 21
+    },
+    {
+        "type": "text",
+        "text": "项目——引入变革与创新",
+        "text_level": 1,
+        "page_idx": 22
+    },
+    {
+        "type": "image",
+        "img_path": "images/440fe3816a0c25db0ec7594762a6624378e401c9f332c318cb21d7f0913dbbb5.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 22
+    },
+    {
+        "type": "text",
+        "text": "项目的的价值:",
+        "page_idx": 22
+    },
+    {
+        "type": "text",
+        "text": "为了持续的发展，必须要在合适的时机引入变革。",
+        "page_idx": 22
+    },
+    {
+        "type": "text",
+        "text": "引入变革就会带来风险，管理项目就是在管理风险!",
+        "page_idx": 22
+    },
+    {
+        "type": "text",
+        "text": "组织的运作与项目——动态的平衡。",
+        "page_idx": 22
+    },
+    {
+        "type": "text",
+        "text": "组织中的项目与运作",
+        "text_level": 1,
+        "page_idx": 23
+    },
+    {
+        "type": "image",
+        "img_path": "images/61d5b91404df1ab07630854a7cb87b94636555e83cf64468e49aaa5a9e7efa71.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 23
+    },
+    {
+        "type": "text",
+        "text": "源：《项目管理手册》 R.T.",
+        "page_idx": 23
+    },
+    {
+        "type": "text",
+        "text": "公司发展与项目和运作",
+        "text_level": 1,
+        "page_idx": 24
+    },
+    {
+        "type": "image",
+        "img_path": "images/c212518da9002703290cf325ce079b4442721b0f2c1e28ebeb6a5ebb339f4ad1.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 24
+    },
+    {
+        "type": "text",
+        "text": "• 在了解项目的组织结构之后，有必要从公司组织的层面鸟瞰全局。",
+        "page_idx": 24
+    },
+    {
+        "type": "text",
+        "text": "源: 《项目管理手册》R.T.",
+        "page_idx": 24
+    },
+    {
+        "type": "text",
+        "text": "组织目标—项目一个人",
+        "text_level": 1,
+        "page_idx": 25
+    },
+    {
+        "type": "image",
+        "img_path": "images/039b47bf6ad324e4c4d45cc7b082c6fad481277ffecdbee3e500d146640665c9.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 25
+    },
+    {
+        "type": "text",
+        "text": "战略计划编制 - 关注项目各个阶段",
+        "text_level": 1,
+        "page_idx": 26
+    },
+    {
+        "type": "image",
+        "img_path": "images/75f78ad007af1cd75aa73e649da2782d364f2acd4a966cef45c388c31fdacce1.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 26
+    },
+    {
+        "type": "text",
+        "text": "源：Rodney Turner 教授",
+        "page_idx": 26
+    },
+    {
+        "type": "text",
+        "text": "项目模型",
+        "text_level": 1,
+        "page_idx": 27
+    },
+    {
+        "type": "image",
+        "img_path": "images/3e8bb4c1d415e59f845b74e4e808bf35b7e84db8ca3b65f2e96d1f2f1420cea8.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 27
+    },
+    {
+        "type": "text",
+        "text": "项目分类: “目标一方法”矩阵",
+        "page_idx": 28
+    },
+    {
+        "type": "image",
+        "img_path": "images/2f65f6f9ccd4a434d2af11a58cecc44368db21d7f1fd343d57ff4d0ffd479683.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 28
+    },
+    {
+        "type": "text",
+        "text": "练习：定义一个项目（S.M.A.R.T.原则）",
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "• 明确性（Specific）：最终目标是否明确了范围、成本、进度、质量？\n• 可度量性（Measurable）：你能在多大程度上测量最终目标的完成情况？\n• 可完成性（Achievable）：在规定时间内，最终目标是否合理，能够实现？\n• 相关性（Relevant）：最终目标是否很重要、有价值，是否值得进行下去？\n• 可跟踪性（Trackable）：你能够对整个项目进程进行跟踪检查吗？",
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "补充：基于的假设和不确定因素。",
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "并回答三个问题：",
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "• 在项目完成时，项目团队将要交付什么东西？\n• 当项目团队交付成果时，如何评价项目是否成功？\n• 谁对以上两个问题有发言权？",
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "什么是项目管理",
+        "text_level": 1,
+        "page_idx": 30
+    },
+    {
+        "type": "text",
+        "text": "项目管理就发生在我们身边:",
+        "page_idx": 30
+    },
+    {
+        "type": "text",
+        "text": "- 解决一个问题;",
+        "page_idx": 30
+    },
+    {
+        "type": "text",
+        "text": "- 组织一个活动;",
+        "page_idx": 30
+    },
+    {
+        "type": "text",
+        "text": "- 创造一个新的的事物;",
+        "page_idx": 30
+    },
+    {
+        "type": "text",
+        "text": "- 当我们感到需要整合资源才能够实现目标的时候。。。",
+        "page_idx": 30
+    },
+    {
+        "type": "text",
+        "text": "项目管理的定义",
+        "text_level": 1,
+        "page_idx": 31
+    },
+    {
+        "type": "text",
+        "text": "- 什么是项目管理",
+        "page_idx": 31
+    },
+    {
+        "type": "text",
+        "text": "• 通过使用知识、技能、工具和方法来组织、计划、实施并监控项目活动，使之满足项目需要。",
+        "page_idx": 31
+    },
+    {
+        "type": "text",
+        "text": "项目管理的特点",
+        "page_idx": 31
+    },
+    {
+        "type": "text",
+        "text": "过程、管理系统、方法的集合；",
+        "page_idx": 31
+    },
+    {
+        "type": "text",
+        "text": "有效的计划和控制；",
+        "page_idx": 31
+    },
+    {
+        "type": "text",
+        "text": "是对项目、项目群、项目组合的管理；",
+        "page_idx": 31
+    },
+    {
+        "type": "text",
+        "text": "项目管理既是管理科学，也是管理艺术。",
+        "page_idx": 31
+    },
+    {
+        "type": "text",
+        "text": "源：PMBOK2000",
+        "page_idx": 31
+    },
+    {
+        "type": "text",
+        "text": "PMBOK—PM Body of Knowledge 项目管理知识体系",
+        "page_idx": 32
+    },
+    {
+        "type": "image",
+        "img_path": "images/c54c20667d93cb1428ec8712e4c3f1a6dfed1d72b7c250a21d9a418387671e54.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 32
+    },
+    {
+        "type": "text",
+        "text": "项目管理所需的技能",
+        "text_level": 1,
+        "page_idx": 33
+    },
+    {
+        "type": "image",
+        "img_path": "images/ab18a251a8c5e3c8451902c64b451e6db7298d7ba473a7dacbee67915f1971cb.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 33
+    },
+    {
+        "type": "text",
+        "text": "硬技巧（方法、过程、技能）",
+        "page_idx": 33
+    },
+    {
+        "type": "text",
+        "text": "计划、跟踪、控制报告",
+        "page_idx": 33
+    },
+    {
+        "type": "image",
+        "img_path": "images/c7276abd58126d9c1593273af15491b834d14269e400966005bb178d7b65d619.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 33
+    },
+    {
+        "type": "text",
+        "text": "软技巧（人员管理）",
+        "page_idx": 33
+    },
+    {
+        "type": "text",
+        "text": "领导",
+        "page_idx": 33
+    },
+    {
+        "type": "text",
+        "text": "团队建设、冲突解决",
+        "page_idx": 33
+    },
+    {
+        "type": "text",
+        "text": "激励、训练",
+        "page_idx": 33
+    },
+    {
+        "type": "text",
+        "text": "协商、沟通、倾听",
+        "page_idx": 33
+    },
+    {
+        "type": "text",
+        "text": "项目管理的功能+工具与技术",
+        "text_level": 1,
+        "page_idx": 34
+    },
+    {
+        "type": "image",
+        "img_path": "images/1df4bfe0fe4a2f6db3c94ce140b38a93b32b06f78efb892ccd47d22c5ddc1622.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 34
+    },
+    {
+        "type": "text",
+        "text": "项目干系人（Stakeholder）",
+        "text_level": 1,
+        "page_idx": 35
+    },
+    {
+        "type": "text",
+        "text": "• 参与项目或受项目影响的个人或组织",
+        "page_idx": 35
+    },
+    {
+        "type": "text",
+        "text": "• 主要的项目干系人",
+        "page_idx": 35
+    },
+    {
+        "type": "image",
+        "img_path": "images/39da12e1d64def8653a9f7820a46d2aff38abefd0afc208c94973979b1da39ec.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 35
+    },
+    {
+        "type": "text",
+        "text": "项目经理需要:",
+        "page_idx": 35
+    },
+    {
+        "type": "text",
+        "text": "一了解和识别各干系人对项目的需求、期望、能发挥作用。",
+        "page_idx": 35
+    },
+    {
+        "type": "text",
+        "text": "一项目干系人管理。",
+        "page_idx": 35
+    },
+    {
+        "type": "image",
+        "img_path": "images/d9504173acff30d029c4ae98410a3c5b76bb5a8c7dd05346ddc0d2ecee3d8e3d.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 35
+    },
+    {
+        "type": "text",
+        "text": "项目干系人之间的关系（举例）",
+        "page_idx": 36
+    },
+    {
+        "type": "image",
+        "img_path": "images/3bc49a5c82daadbc325be946b970fdac632cc93f1badbd83279bb1f429cf7927.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 36
+    },
+    {
+        "type": "text",
+        "text": "项目成功的关键因素",
+        "text_level": 1,
+        "page_idx": 37
+    },
+    {
+        "type": "text",
+        "text": "• 要求你考虑:",
+        "page_idx": 37
+    },
+    {
+        "type": "text",
+        "text": "谁是项目干系人?",
+        "page_idx": 37
+    },
+    {
+        "type": "text",
+        "text": "• 项目干系人的期望是什么?",
+        "page_idx": 37
+    },
+    {
+        "type": "text",
+        "text": "• 在开始时不可能达成完全的一致意见",
+        "page_idx": 37
+    },
+    {
+        "type": "text",
+        "text": "• 但至少要明确他们是谁?",
+        "page_idx": 37
+    },
+    {
+        "type": "text",
+        "text": "• 他们想得到什么?",
+        "page_idx": 37
+    },
+    {
+        "type": "text",
+        "text": "• 最终你的目标是使每一个人得到合理的满意",
+        "page_idx": 37
+    },
+    {
+        "type": "text",
+        "text": "• 并不必要是“高兴”, “合理的满意”即可。",
+        "page_idx": 37
+    },
+    {
+        "type": "text",
+        "text": "项目干系人的真实需要?",
+        "text_level": 1,
+        "page_idx": 38
+    },
+    {
+        "type": "image",
+        "img_path": "images/891ae039ef66ed08db30239f0d52c41c71861faf82afbd12e749e794554b29f0.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 38
+    },
+    {
+        "type": "text",
+        "text": "干系人登记表（示例）",
+        "text_level": 1,
+        "page_idx": 39
+    },
+    {
+        "type": "table",
+        "img_path": "images/571878259c533ec9b12a7304e41f6857fd1eb0bf1ae97dac0fc1c9a1e3b10a6a.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td colspan=\"4\">项目名称:</td><td colspan=\"4\">评审者:</td></tr><tr><td>序号</td><td>主要项目干系人</td><td>在项目中的角色</td><td>基本需求和期望</td><td>在本项目中的利益程度(高,中,低)</td><td colspan=\"2\">对项目的影\n响程度(高,中,低)</td><td>管理与其关系的建议</td></tr><tr><td>1</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>5</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></table>",
+        "page_idx": 39
+    },
+    {
+        "type": "text",
+        "text": "练习",
+        "text_level": 1,
+        "page_idx": 40
+    },
+    {
+        "type": "text",
+        "text": "结合小组的项目，分析项目干系人，编写干系人登记表。",
+        "page_idx": 40
+    },
+    {
+        "type": "text",
+        "text": "项目生命期示例",
+        "text_level": 1,
+        "page_idx": 41
+    },
+    {
+        "type": "image",
+        "img_path": "images/e007ad8b71f8f8dc8980bf251a097cef4d86653213d5645e69ab3fee7b459454.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 41
+    },
+    {
+        "type": "text",
+        "text": "定义阶段的意义",
+        "page_idx": 41
+    },
+    {
+        "type": "text",
+        "text": "• 有利于进行计划和对项目进行控制\n• 定义了对项目的检查点和项目不同时段的主要焦点",
+        "page_idx": 41
+    },
+    {
+        "type": "text",
+        "text": "阶段点评审:",
+        "page_idx": 41
+    },
+    {
+        "type": "text",
+        "text": "• 确保前一阶段的正确性和完整性;\n• 为开展下一阶段的工作做好准备, 准备资源;",
+        "page_idx": 41
+    },
+    {
+        "type": "text",
+        "text": "项目管理生命期与项目生命期",
+        "text_level": 1,
+        "page_idx": 42
+    },
+    {
+        "type": "image",
+        "img_path": "images/ead6d96f321445950edd722622196bdb38814279d3f422648968c4be02bd6d13.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 42
+    },
+    {
+        "type": "text",
+        "text": "项目的管理过程模型之间的比较",
+        "text_level": 1,
+        "page_idx": 43
+    },
+    {
+        "type": "image",
+        "img_path": "images/2b0c1fc9dfad1c036bb674cc970af7dd206ede31ad10849a11698c9ee4aa609d.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 43
+    },
+    {
+        "type": "text",
+        "text": "过程的方法:",
+        "page_idx": 43
+    },
+    {
+        "type": "text",
+        "text": "• 分步骤实施",
+        "page_idx": 43
+    },
+    {
+        "type": "text",
+        "text": "• 阶段交接不是“扔过墙”：协同工作",
+        "page_idx": 43
+    },
+    {
+        "type": "text",
+        "text": "• 下一个阶段的人: 也是你的客户",
+        "page_idx": 43
+    },
+    {
+        "type": "text",
+        "text": "扔过墙 - 彼此的合作？",
+        "text_level": 1,
+        "page_idx": 44
+    },
+    {
+        "type": "image",
+        "img_path": "images/071393c7e53b101b2d73c7a2c223a9de70bb3a2002e5c0a15e28fb3664467f56.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 44
+    },
+    {
+        "type": "text",
+        "text": "并行工程在项目中的应用",
+        "text_level": 1,
+        "page_idx": 45
+    },
+    {
+        "type": "image",
+        "img_path": "images/a54037684e71af90e0e5b760259e03b6a2bd160a9d5e9e730da95af5cf6eed9f.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 45
+    },
+    {
+        "type": "text",
+        "text": "并行工程项目模型（新产品开发）",
+        "text_level": 1,
+        "page_idx": 46
+    },
+    {
+        "type": "image",
+        "img_path": "images/0dda2b38f26206c052d1efb052c5bee6b9e923a546bc161c8a4fa8637a5168ca.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 46
+    },
+    {
+        "type": "text",
+        "text": "源：IBM Rochester Silver lake Project",
+        "page_idx": 46
+    },
+    {
+        "type": "text",
+        "text": "• 并行开发是时代的趋势，但也同时对项目管理提出了高的要求\n— 有效的组织\n— 有效的沟通",
+        "page_idx": 46
+    },
+    {
+        "type": "text",
+        "text": "可交付成果 (Deliverable)",
+        "page_idx": 47
+    },
+    {
+        "type": "text",
+        "text": "有形的、可验证的工作产品。",
+        "page_idx": 47
+    },
+    {
+        "type": "text",
+        "text": "例如：可行性研究、详细设计、或工作原型。",
+        "page_idx": 47
+    },
+    {
+        "type": "text",
+        "text": "摘自 PMBOK",
+        "page_idx": 47
+    },
+    {
+        "type": "text",
+        "text": "项目生命期的特性 (I)",
+        "text_level": 1,
+        "page_idx": 48
+    },
+    {
+        "type": "image",
+        "img_path": "images/6088df55bd729e0c26ed49f901b577f9681f21fa4a01e8d251360ab0364a7044.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 48
+    },
+    {
+        "type": "text",
+        "text": "项目干系人对项目的影响随着时间的推移变得越来越微弱。",
+        "page_idx": 48
+    },
+    {
+        "type": "text",
+        "text": "成功的概率随着时间的推移越来越大",
+        "page_idx": 48
+    },
+    {
+        "type": "text",
+        "text": "每个阶段的结束以预先定义的可交付成果为标志",
+        "page_idx": 48
+    },
+    {
+        "type": "text",
+        "text": "项目生命期的特性 (II)",
+        "text_level": 1,
+        "page_idx": 49
+    },
+    {
+        "type": "text",
+        "text": "• 项目初期投入直接影响整个项目的成败\n• 需求、计划管理的重要性。\n• 项目生命期往往是产品生命期的一部分\n• 项目生命期主要定义了:",
+        "page_idx": 49
+    },
+    {
+        "type": "text",
+        "text": "— 项目每个阶段应作的工作\n— 每个阶段所包括的人员",
+        "page_idx": 49
+    },
+    {
+        "type": "text",
+        "text": "• 产品开发仅仅是产品生命期的一部分",
+        "page_idx": 49
+    },
+    {
+        "type": "text",
+        "text": "— 研发成果到产品的转化应该成为项目生命期的一部分",
+        "page_idx": 49
+    },
+    {
+        "type": "text",
+        "text": "— 研发过程中应考虑产品使用及维护",
+        "page_idx": 49
+    },
+    {
+        "type": "text",
+        "text": "练习：项目生命期",
+        "text_level": 1,
+        "page_idx": 50
+    },
+    {
+        "type": "text",
+        "text": "分组描述你的项目的生命期划分。",
+        "page_idx": 50
+    },
+    {
+        "type": "text",
+        "text": "明确转阶段可交付成果。",
+        "page_idx": 50
+    },
+    {
+        "type": "text",
+        "text": "探讨转阶段可能存在的问题。",
+        "page_idx": 50
+    },
+    {
+        "type": "text",
+        "text": "组织结构类型一职能型组织",
+        "text_level": 1,
+        "page_idx": 51
+    },
+    {
+        "type": "image",
+        "img_path": "images/535f86a87f65b0323b5e957e6c17f8bb955f0259eafb1fd98092fe495572e85a.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 51
+    },
+    {
+        "type": "text",
+        "text": "• 优点：清楚的上下级关系，按专长组织的团队易于提高专业技术。",
+        "page_idx": 51
+    },
+    {
+        "type": "text",
+        "text": "• 弊端：项目间的跨部门沟通困难，妨碍客户参与项目。项目经理对项目没有足够的控制授权，分层的决策影响对问题的反应速度。",
+        "page_idx": 51
+    },
+    {
+        "type": "text",
+        "text": "组织结构类型一矩阵型",
+        "text_level": 1,
+        "page_idx": 52
+    },
+    {
+        "type": "image",
+        "img_path": "images/e8f47ff576f165ff4183ef93a34b78474f20f7f7f20f8dc7987cc51f1e149623.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 52
+    },
+    {
+        "type": "text",
+        "text": "集成产品开发采用矩阵式结构",
+        "text_level": 1,
+        "page_idx": 53
+    },
+    {
+        "type": "image",
+        "img_path": "images/8662ac55b70de8a80e05f3fe8349a9f57639bdae2b550f8b5f3b7b536cd64bc4.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 53
+    },
+    {
+        "type": "text",
+        "text": "横向沟通与协同",
+        "page_idx": 53
+    },
+    {
+        "type": "text",
+        "text": "IPT：Integrated Product Team，集成产品团队",
+        "page_idx": 53
+    },
+    {
+        "type": "text",
+        "text": "项目组织结构对项目的影响",
+        "text_level": 1,
+        "page_idx": 54
+    },
+    {
+        "type": "table",
+        "img_path": "images/31312beaab29a504dc9fb3c654f381fa38a1bed4c089b1dde64c008c59828f4c.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=\"2\">组织类</td><td rowspan=\"2\">项目特点</td><td rowspan=\"2\">组织</td><td rowspan=\"2\">职能型组织</td><td colspan=\"2\">矩阵型组织</td><td>项目型组织</td></tr><tr><td>弱矩阵型</td><td>平衡矩阵</td><td>强矩阵型</td></tr><tr><td>项目经理的权威</td><td>很少或没有</td><td>有限</td><td>小到中等</td><td>中等到大</td><td>大到几乎全权</td><td></td></tr><tr><td>项目全时人员%</td><td>几乎没有</td><td>几乎没有</td><td>几乎没有</td><td>几乎没有</td><td>几乎没有</td><td>几乎没有</td></tr><tr><td>项目经理</td><td>部分时间</td><td>部分时间</td><td>全部</td><td>全部</td><td>全部</td><td>全部</td></tr><tr><td>项目经理的头衔</td><td>PM协调员/项目主管</td><td>PM协调员/项目主管</td><td>PM协调员/项目主管</td><td>项目经理/项目经理/计划经理</td><td>项目经理/计划经理</td><td>项目经理/计划经理</td></tr><tr><td>项目管理行政人员</td><td>部分时间</td><td>部分时间</td><td>部分时间</td><td>部分时间</td><td>全部</td><td>全部</td></tr></table>",
+        "page_idx": 54
+    },
+    {
+        "type": "text",
+        "text": "保留职能部门的必要性",
+        "text_level": 1,
+        "page_idx": 55
+    },
+    {
+        "type": "text",
+        "text": "• 提供职业发展结构；\n• 公司的知识经验积累；\n• 公司新的管理流程和系统；\n• 人力资源的共享式利用；\n• 项目之间的缓冲。",
+        "page_idx": 55
+    },
+    {
+        "type": "text",
+        "text": "选择合适的组织结构",
+        "text_level": 1,
+        "page_idx": 56
+    },
+    {
+        "type": "text",
+        "text": "结合项目的业务特点",
+        "page_idx": 56
+    },
+    {
+        "type": "text",
+        "text": "项目大小规模；产品（服务）特点；客户特点及客户管理；对资源的需求情况。",
+        "page_idx": 56
+    },
+    {
+        "type": "text",
+        "text": "需要考虑的接口：",
+        "page_idx": 56
+    },
+    {
+        "type": "text",
+        "text": "专业团队之间；项目团队与客户之间；项目与项目之间。",
+        "page_idx": 56
+    },
+    {
+        "type": "text",
+        "text": "必要时需要考虑结构类型的组合。",
+        "page_idx": 56
+    },
+    {
+        "type": "text",
+        "text": "项目管理办公室的层级设计",
+        "text_level": 1,
+        "page_idx": 57
+    },
+    {
+        "type": "image",
+        "img_path": "images/c26401005a61cd93ea9896a4e2a62ca9460c2619ea3f29993f1917da80c4bf7d.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 57
+    },
+    {
+        "type": "text",
+        "text": "根据业务、项目、组织特点确定项目办公室的设立。",
+        "page_idx": 57
+    },
+    {
+        "type": "text",
+        "text": "项目管理办公室的主要作用",
+        "text_level": 1,
+        "page_idx": 58
+    },
+    {
+        "type": "text",
+        "text": "- 为项目经理提供技术支持，包括：",
+        "page_idx": 58
+    },
+    {
+        "type": "text",
+        "text": "- 计划、监测、控制、文档制定、变更控制、成本控制、风险管理",
+        "page_idx": 58
+    },
+    {
+        "type": "text",
+        "text": "- 总结经验教训，知识管理",
+        "page_idx": 58
+    },
+    {
+        "type": "text",
+        "text": "- 建立卓越中心（Center of Excellence）- 制定并推广项目管理流程 / 标准和方法（IBM 的 WWPMM，HP 的 FocuPM）",
+        "page_idx": 58
+    },
+    {
+        "type": "text",
+        "text": "- 最佳实践经验的总结。",
+        "page_idx": 58
+    },
+    {
+        "type": "text",
+        "text": "- 辅导项目经理",
+        "page_idx": 58
+    },
+    {
+        "type": "text",
+        "text": "- 为项目团队提供培训方案",
+        "page_idx": 58
+    },
+    {
+        "type": "text",
+        "text": "- 直接参与项目管理、项目群管理、多项目管理、资源优化",
+        "page_idx": 58
+    },
+    {
+        "type": "text",
+        "text": "- 项目管理软件",
+        "page_idx": 58
+    },
+    {
+        "type": "text",
+        "text": "过程",
+        "text_level": 1,
+        "page_idx": 59
+    },
+    {
+        "type": "text",
+        "text": "导致某种结果的一系列行动。",
+        "page_idx": 59
+    },
+    {
+        "type": "text",
+        "text": "- - 摘自 PMBOK",
+        "page_idx": 59
+    },
+    {
+        "type": "text",
+        "text": "• 项目管理 过程 关注对项目活动的描述和组织\n•",
+        "page_idx": 59
+    },
+    {
+        "type": "text",
+        "text": "• 产品导向过程 关注对项目产品的定义和生成。",
+        "page_idx": 59
+    },
+    {
+        "type": "text",
+        "text": "过程举例",
+        "text_level": 1,
+        "page_idx": 60
+    },
+    {
+        "type": "text",
+        "text": "• 项目范围计划过程",
+        "page_idx": 60
+    },
+    {
+        "type": "image",
+        "img_path": "images/860210380931266ab2f62ef302f23f692773e09050f68f5611079314a84da188.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 60
+    },
+    {
+        "type": "text",
+        "text": "项目管理基本过程（示例）",
+        "text_level": 1,
+        "page_idx": 61
+    },
+    {
+        "type": "image",
+        "img_path": "images/45c98f35c632e1c4347a0db9fa9613d0047783c80e73649cf3b60da8cb8bc1ff.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 61
+    },
+    {
+        "type": "text",
+        "text": "过程之间的相互关系",
+        "text_level": 1,
+        "page_idx": 62
+    },
+    {
+        "type": "image",
+        "img_path": "images/d3180f2040c45d2fe48cdec47ba5edcd1eac21f19127b4362d716e170e3df83a.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 62
+    },
+    {
+        "type": "text",
+        "text": "项目管理过程",
+        "text_level": 1,
+        "page_idx": 63
+    },
+    {
+        "type": "image",
+        "img_path": "images/c65764ff460f80835959ae281a03a1d23b35a48a4159f4086a584cabe01065ba.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "page_idx": 63
+    },
+    {
+        "type": "text",
+        "text": "PMI 的 PMBOK 中的九大知识领域",
+        "page_idx": 64
+    },
+    {
+        "type": "text",
+        "text": "基准计划",
+        "page_idx": 64
+    },
+    {
+        "type": "text",
+        "text": "范围管理",
+        "page_idx": 64
+    },
+    {
+        "type": "text",
+        "text": "时间管理",
+        "page_idx": 64
+    },
+    {
+        "type": "text",
+        "text": "成本管理",
+        "page_idx": 64
+    },
+    {
+        "type": "text",
+        "text": "质量管理",
+        "page_idx": 64
+    },
+    {
+        "type": "text",
+        "text": "协调资源",
+        "page_idx": 64
+    },
+    {
+        "type": "text",
+        "text": "人力资源管理",
+        "page_idx": 64
+    },
+    {
+        "type": "text",
+        "text": "采购管理",
+        "page_idx": 64
+    },
+    {
+        "type": "text",
+        "text": "沟通管理",
+        "page_idx": 64
+    },
+    {
+        "type": "text",
+        "text": "目标一致",
+        "page_idx": 64
+    },
+    {
+        "type": "text",
+        "text": "综合管理",
+        "page_idx": 64
+    },
+    {
+        "type": "text",
+        "text": "防患于未然",
+        "page_idx": 64
+    },
+    {
+        "type": "text",
+        "text": "风险管理",
+        "page_idx": 64
+    },
+    {
+        "type": "text",
+        "text": "单元总结",
+        "text_level": 1,
+        "page_idx": 65
+    },
+    {
+        "type": "text",
+        "text": "• 项目管理背景与发展\n• 项目与项目管理的基本概念\n• 项目管理基本要素\n• 项目干系人管理\n• 项目的组织结构\n• 项目管理过程与项目生命期\n• 项目管理 9 大知识领域\n• 主要练习：项目定义与项目干系人管理",
+        "page_idx": 65
+    }
+]

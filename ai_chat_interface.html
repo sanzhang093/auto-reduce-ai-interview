@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI管理辅助系统 - 智能项目管理</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .chat-container {
+            flex: 1;
+            max-width: 1000px;
+            margin: 20px auto;
+            width: 95%;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 60vh;
+            min-height: 400px;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message.assistant {
+            justify-content: flex-start;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 15px 20px;
+            border-radius: 20px;
+            position: relative;
+            word-wrap: break-word;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.assistant .message-content {
+            background: #f8f9fa;
+            color: #333;
+            border: 1px solid #e9ecef;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            margin: 0 10px;
+            flex-shrink: 0;
+        }
+
+        .message.user .message-avatar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .message.assistant .message-avatar {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .chat-input-container {
+            padding: 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .chat-input {
+            flex: 1;
+            min-height: 50px;
+            max-height: 120px;
+            padding: 15px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 1em;
+            font-family: inherit;
+            resize: none;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .chat-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .send-button {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .send-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .send-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .suggestions {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .suggestion-chip {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .suggestion-chip:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .knowledge-chip {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            font-weight: bold;
+            border: 1px solid #ee5a24;
+        }
+        
+        .knowledge-chip:hover {
+            background: linear-gradient(135deg, #ee5a24, #ff6b6b);
+            transform: translateY(-2px) scale(1.05);
+        }
+        
+        .expert-chip {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            font-weight: bold;
+            border: 1px solid #44a08d;
+        }
+        
+        .expert-chip:hover {
+            background: linear-gradient(135deg, #44a08d, #4ecdc4);
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .loading {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .loading.show {
+            display: flex;
+        }
+
+        .loading-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .loading-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #667eea;
+            animation: loading 1.4s infinite ease-in-out;
+        }
+
+        .loading-dot:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes loading {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        .data-display {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .data-display h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .data-display pre {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 0.9em;
+            border: 1px solid #e9ecef;
+        }
+
+        .status-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.95);
+            padding: 10px 15px;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4caf50;
+        }
+
+        .status-dot.offline {
+            background: #f44336;
+        }
+
+        @media (max-width: 768px) {
+            .chat-container {
+                margin: 10px;
+                width: calc(100% - 20px);
+                border-radius: 15px;
+            }
+            
+            .message-content {
+                max-width: 85%;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .status-indicator {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 10px auto;
+                width: fit-content;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="status-indicator" id="statusIndicator">
+        <div class="status-dot" id="statusDot"></div>
+        <span id="statusText">检查连接中...</span>
+    </div>
+
+    <div class="header">
+        <h1>🤖 AI管理辅助系统</h1>
+        <p>智能项目管理助手 - 用自然语言管理您的项目</p>
+    </div>
+
+    <div class="chat-container">
+        <div class="chat-messages" id="chatMessages">
+            <div class="message assistant">
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">
+                    <p>👋 您好！我是AI管理辅助系统，基于Qwen_Max的智能项目管理助手。</p>
+                    <p>我具备以下能力：</p>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li>🧠 <strong>智能意图分析</strong> - 理解您的自然语言需求</li>
+                        <li>🔧 <strong>自动工具调用</strong> - 根据意图调用相应API</li>
+                        <li>📊 <strong>智能数据展示</strong> - 将数据转换为易读格式</li>
+                        <li>💬 <strong>自然语言交互</strong> - 像聊天一样管理项目</li>
+                    </ul>
+                    <p>请用自然语言告诉我您想了解什么，比如：</p>
+                    <p style="font-style: italic; color: #666;">"项目进度如何？" "有哪些风险？" "生成项目报告" "团队工作负载怎么样？"</p>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: #888;">💡 我现在使用Qwen_Max模型进行智能分析和回答</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-input-container">
+            <div class="loading" id="loading">
+                <span>AI正在思考</span>
+                <div class="loading-dots">
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                </div>
+            </div>
+            
+            <div class="chat-input-wrapper">
+                <textarea 
+                    class="chat-input" 
+                    id="chatInput" 
+                    placeholder="请输入您的问题，比如：项目进度如何？有哪些风险？生成项目报告..."
+                    rows="1"
+                ></textarea>
+                <button class="send-button" id="sendButton" onclick="sendMessage()">
+                    ➤
+                </button>
+            </div>
+            
+            <div class="suggestions">
+                <div class="suggestion-chip" onclick="sendSuggestion('项目进度如何？')">📊 项目进度</div>
+                <div class="suggestion-chip" onclick="sendSuggestion('有哪些任务？')">✅ 任务列表</div>
+                <div class="suggestion-chip" onclick="sendSuggestion('扫描项目风险')">⚠️ 风险扫描</div>
+                <div class="suggestion-chip" onclick="sendSuggestion('生成项目报告')">📈 项目报告</div>
+                <div class="suggestion-chip" onclick="sendSuggestion('团队工作负载如何？')">👥 团队状态</div>
+                <div class="suggestion-chip" onclick="sendSuggestion('项目预算使用情况')">💰 预算分析</div>
+                <div class="suggestion-chip expert-chip" onclick="openExpertAdvice()">🎯 专家建议</div>
+                <div class="suggestion-chip knowledge-chip" onclick="openKnowledgeManagement()">🧠 知识管理</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+        let isLoading = false;
+
+        // 页面加载时检查连接状态
+        document.addEventListener('DOMContentLoaded', function() {
+            checkConnection();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            const chatInput = document.getElementById('chatInput');
+            const sendButton = document.getElementById('sendButton');
+
+            // 回车发送消息
+            chatInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+
+            // 自动调整输入框高度
+            chatInput.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+            });
+        }
+
+        async function checkConnection() {
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                if (response.ok) {
+                    updateStatus('在线', true);
+                } else {
+                    updateStatus('离线', false);
+                }
+            } catch (error) {
+                updateStatus('离线', false);
+            }
+        }
+
+        function updateStatus(text, isOnline) {
+            document.getElementById('statusText').textContent = text;
+            document.getElementById('statusDot').className = isOnline ? 'status-dot' : 'status-dot offline';
+        }
+
+        function sendSuggestion(text) {
+            document.getElementById('chatInput').value = text;
+            sendMessage();
+        }
+        
+        function openKnowledgeManagement() {
+            // 创建知识管理模态框
+            const modal = document.createElement('div');
+            modal.className = 'knowledge-modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>🧠 知识管理</h2>
+                        <span class="close-btn" onclick="closeKnowledgeModal()">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <p>选择要生成知识汇总的项目：</p>
+                        <div class="project-list">
+                            <div class="project-item" onclick="generateKnowledgeForProject('PRJ-2024-001', '智能管理系统开发项目')">
+                                <div class="project-name">智能管理系统开发项目</div>
+                                <div class="project-id">PRJ-2024-001</div>
+                            </div>
+                            <div class="project-item" onclick="generateKnowledgeForProject('BAT-2024-001', '高能量密度锂离子电池正极材料研发')">
+                                <div class="project-name">高能量密度锂离子电池正极材料研发</div>
+                                <div class="project-id">BAT-2024-001</div>
+                            </div>
+                            <div class="project-item" onclick="generateKnowledgeForProject('ROB-2024-001', '智能养老服务机器人系统')">
+                                <div class="project-name">智能养老服务机器人系统</div>
+                                <div class="project-id">ROB-2024-001</div>
+                            </div>
+                            <div class="project-item" onclick="generateKnowledgeForProject('all', '所有项目')">
+                                <div class="project-name">所有项目知识汇总</div>
+                                <div class="project-id">全部项目</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // 添加模态框样式
+            const style = document.createElement('style');
+            style.textContent = `
+                .knowledge-modal {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.5);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 1000;
+                }
+                .modal-content {
+                    background: white;
+                    border-radius: 20px;
+                    padding: 30px;
+                    max-width: 600px;
+                    width: 90%;
+                    max-height: 80vh;
+                    overflow-y: auto;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                }
+                .modal-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 20px;
+                    padding-bottom: 15px;
+                    border-bottom: 2px solid #f0f0f0;
+                }
+                .modal-header h2 {
+                    color: #2c3e50;
+                    margin: 0;
+                }
+                .close-btn {
+                    font-size: 2em;
+                    cursor: pointer;
+                    color: #999;
+                    transition: color 0.3s ease;
+                }
+                .close-btn:hover {
+                    color: #333;
+                }
+                .project-list {
+                    display: grid;
+                    gap: 15px;
+                }
+                .project-item {
+                    padding: 20px;
+                    border: 2px solid #f0f0f0;
+                    border-radius: 15px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    background: #fafafa;
+                }
+                .project-item:hover {
+                    border-color: #667eea;
+                    background: #f8f9ff;
+                    transform: translateY(-2px);
+                }
+                .project-name {
+                    font-weight: bold;
+                    color: #2c3e50;
+                    margin-bottom: 5px;
+                }
+                .project-id {
+                    color: #666;
+                    font-size: 0.9em;
+                }
+            `;
+            document.head.appendChild(style);
+            document.body.appendChild(modal);
+        }
+        
+        function closeKnowledgeModal() {
+            const modal = document.querySelector('.knowledge-modal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+        
+        function openExpertAdvice() {
+            // 创建专家建议模态框
+            const modal = document.createElement('div');
+            modal.className = 'expert-modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>🎯 专家建议</h2>
+                        <span class="close-btn" onclick="closeExpertModal()">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <p style="margin-bottom: 20px; color: #666;">
+                            基于PMBOK第七版专业知识，为您的项目风险提供专业指导建议
+                        </p>
+                        <div class="project-selection">
+                            <h3>选择项目：</h3>
+                            <div class="project-options">
+                                <div class="project-option" onclick="generateExpertAdvice('PRJ-2024-001', '智能管理系统开发项目')">
+                                    <div class="project-name">智能管理系统开发项目</div>
+                                    <div class="project-id">PRJ-2024-001</div>
+                                </div>
+                                <div class="project-option" onclick="generateExpertAdvice('BAT-2024-001', '高能量密度锂离子电池正极材料研发')">
+                                    <div class="project-name">高能量密度锂离子电池正极材料研发</div>
+                                    <div class="project-id">BAT-2024-001</div>
+                                </div>
+                                <div class="project-option" onclick="generateExpertAdvice('ROB-2024-001', '智能养老服务机器人系统')">
+                                    <div class="project-name">智能养老服务机器人系统</div>
+                                    <div class="project-id">ROB-2024-001</div>
+                                </div>
+                                <div class="project-option" onclick="generateExpertAdvice('all', '所有项目')">
+                                    <div class="project-name">所有项目专家建议</div>
+                                    <div class="project-id">综合风险分析</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // 添加模态框样式
+            const style = document.createElement('style');
+            style.textContent = `
+                .expert-modal {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.5);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 1000;
+                }
+                .modal-content {
+                    background: white;
+                    border-radius: 20px;
+                    padding: 30px;
+                    max-width: 600px;
+                    width: 90%;
+                    max-height: 80vh;
+                    overflow-y: auto;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                }
+                .modal-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 20px;
+                    padding-bottom: 15px;
+                    border-bottom: 2px solid #f0f0f0;
+                }
+                .modal-header h2 {
+                    color: #2c3e50;
+                    margin: 0;
+                }
+                .close-btn {
+                    font-size: 24px;
+                    cursor: pointer;
+                    color: #999;
+                    transition: color 0.3s;
+                }
+                .close-btn:hover {
+                    color: #333;
+                }
+                .project-option {
+                    padding: 15px;
+                    border: 2px solid #e0e0e0;
+                    border-radius: 10px;
+                    margin-bottom: 10px;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                }
+                .project-option:hover {
+                    border-color: #4ecdc4;
+                    background: #f8fffe;
+                    transform: translateY(-2px);
+                }
+                .project-name {
+                    font-weight: bold;
+                    color: #2c3e50;
+                    margin-bottom: 5px;
+                }
+                .project-id {
+                    color: #666;
+                    font-size: 0.9em;
+                }
+            `;
+            document.head.appendChild(style);
+            document.body.appendChild(modal);
+        }
+        
+        function closeExpertModal() {
+            const modal = document.querySelector('.expert-modal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+        
+        async function generateExpertAdvice(projectId, projectName) {
+            closeExpertModal();
+            
+            // 显示加载状态
+            showLoading(true);
+            
+            // 添加用户消息到聊天界面
+            const message = projectId === 'all' ? '获取所有项目的专家建议' : `获取${projectName}的专家建议`;
+            addMessage(message, 'user');
+            
+            try {
+                // 调用专家建议API（使用风险分析+RAG指导）
+                const response = await fetch(`${API_BASE}/api/v1/auto-reduce/intelligent-chat/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: projectId === 'all' ? '扫描项目风险并提供专家建议' : `扫描${projectName}的风险并提供专家建议`,
+                        session_id: `expert_${Date.now()}`
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.code === 200 && data.data && data.data.response) {
+                    // 格式化专家建议响应
+                    const expertResponse = formatExpertAdviceResponse(data.data.response, projectName);
+                    addMessage(expertResponse, 'assistant');
+                } else {
+                    addMessage('专家建议生成失败，请稍后再试。', 'assistant');
+                }
+                
+            } catch (error) {
+                console.error('专家建议API调用错误:', error);
+                addMessage('抱歉，专家建议服务暂时不可用。请稍后再试。', 'assistant');
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        function formatExpertAdviceResponse(response, projectName) {
+            // 如果响应已经包含专家建议格式，直接返回
+            if (response.includes('PMBOK指导') || response.includes('专家建议') || response.includes('风险分析报告')) {
+                return response;
+            }
+            
+            // 否则添加专家建议的格式说明
+            return `## 🎯 ${projectName} - 专家建议报告\n\n${response}\n\n---\n\n**💡 提示**：如需更详细的PMBOK专业指导，请使用"扫描项目风险"功能获取包含页码引用的专业建议。`;
+        }
+        
+        async function generateKnowledgeForProject(projectId, projectName) {
+            closeKnowledgeModal();
+            
+            // 显示加载状态
+            showLoading(true);
+            
+            // 添加用户消息到聊天界面
+            const message = projectId === 'all' ? '进行知识管理汇总' : `${projectName}的知识管理汇总`;
+            addMessage(message, 'user');
+            
+            try {
+                // 直接调用知识管理API
+                const response = await fetch(`${API_BASE}/api/v1/auto-reduce/intelligent-chat/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: '知识管理汇总',
+                        session_id: `km_${Date.now()}`
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.code === 200 && data.data && data.data.response) {
+                    addMessage(data.data.response, 'assistant');
+                } else {
+                    addMessage('知识管理汇总生成失败，请稍后再试。', 'assistant');
+                }
+                
+            } catch (error) {
+                console.error('知识管理API调用错误:', error);
+                addMessage('抱歉，知识管理服务暂时不可用。请稍后再试。', 'assistant');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        async function sendMessage() {
+            const chatInput = document.getElementById('chatInput');
+            const message = chatInput.value.trim();
+            
+            if (!message || isLoading) return;
+
+            // 添加用户消息
+            addMessage(message, 'user');
+            chatInput.value = '';
+            chatInput.style.height = 'auto';
+
+            // 显示加载状态
+            showLoading(true);
+
+            try {
+                // 分析用户意图并调用相应API
+                const response = await analyzeAndRespond(message);
+                addMessage(response, 'assistant');
+            } catch (error) {
+                addMessage('抱歉，我遇到了一些问题。请稍后再试。', 'assistant');
+                console.error('Error:', error);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        async function analyzeAndRespond(userMessage) {
+            try {
+                // 调用真正的AI API
+                const response = await fetch(`${API_BASE}/api/v1/auto-reduce/intelligent-chat/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: userMessage,
+                        session_id: 'web_session'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.code === 200) {
+                    return data.data.response;
+                } else {
+                    return `抱歉，AI服务遇到问题：${data.message}`;
+                }
+            } catch (error) {
+                console.error('AI API调用失败:', error);
+                return "抱歉，AI服务暂时不可用，请稍后再试。";
+            }
+        }
+
+        // 所有功能现在都通过AI API处理，不再需要单独的处理函数
+
+        function addMessage(content, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const avatar = document.createElement('div');
+            avatar.className = 'message-avatar';
+            avatar.textContent = sender === 'user' ? '👤' : '🤖';
+            
+            const messageContent = document.createElement('div');
+            messageContent.className = 'message-content';
+            
+            // 处理换行和格式化
+            const formattedContent = content.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            messageContent.innerHTML = formattedContent;
+            
+            messageDiv.appendChild(avatar);
+            messageDiv.appendChild(messageContent);
+            chatMessages.appendChild(messageDiv);
+            
+            // 滚动到底部
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showLoading(show) {
+            isLoading = show;
+            const loading = document.getElementById('loading');
+            const sendButton = document.getElementById('sendButton');
+            
+            if (show) {
+                loading.classList.add('show');
+                sendButton.disabled = true;
+            } else {
+                loading.classList.remove('show');
+                sendButton.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
