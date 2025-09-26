@@ -390,6 +390,17 @@
                 <div class="suggestion-chip expert-chip" onclick="openExpertAdvice()">🎯 专家建议</div>
                 <div class="suggestion-chip knowledge-chip" onclick="openKnowledgeManagement()">🧠 知识管理</div>
             </div>
+            
+            <!-- 功能页面按钮区域 -->
+            <div class="suggestions" style="margin-top: 15px; border-top: 1px solid #e9ecef; padding-top: 15px;">
+                <div style="color: #666; font-size: 0.9em; margin-bottom: 10px; font-weight: bold;">🔧 功能页面</div>
+                <div class="suggestion-chip" onclick="openGanttChart()" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; font-weight: bold;">📅 甘特图</div>
+                <div class="suggestion-chip" onclick="openProgressChart()" style="background: linear-gradient(135deg, #4facfe, #00f2fe); color: white; font-weight: bold;">📈 进度图</div>
+                <div class="suggestion-chip" onclick="openKnowledgePage()" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24); color: white; font-weight: bold;">📚 知识库</div>
+                <div class="suggestion-chip" onclick="openReportVisualization()" style="background: linear-gradient(135deg, #4ecdc4, #44a08d); color: white; font-weight: bold;">📊 报告可视化</div>
+                <div class="suggestion-chip" onclick="openProjectReport()" style="background: linear-gradient(135deg, #f093fb, #f5576c); color: white; font-weight: bold;">📋 项目报告</div>
+                <div class="suggestion-chip" onclick="openTestConnection()" style="background: linear-gradient(135deg, #a8edea, #fed6e3); color: #333; font-weight: bold;">🔗 连接测试</div>
+            </div>
         </div>
     </div>
 
@@ -871,6 +882,31 @@
                 loading.classList.remove('show');
                 sendButton.disabled = false;
             }
+        }
+
+        // 功能页面跳转函数
+        function openGanttChart() {
+            window.open('gantt_visualization.html', '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+        }
+        
+        function openProgressChart() {
+            window.open('project_report_visualization.html', '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+        }
+        
+        function openKnowledgePage() {
+            window.open('knowledge_management.html', '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+        }
+        
+        function openReportVisualization() {
+            window.open('report_visualization.html', '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+        }
+        
+        function openProjectReport() {
+            window.open('project_report_visualization.html', '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+        }
+        
+        function openTestConnection() {
+            window.open('test_connection.html', '_blank', 'width=1000,height=600,scrollbars=yes,resizable=yes');
         }
     </script>
 </body>
