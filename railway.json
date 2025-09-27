@@ -5,7 +5,7 @@
     "buildCommand": "pip install -r requirements_railway.txt"
   },
   "deploy": {
-    "startCommand": "python deploy_railway_v002.py",
+    "startCommand": "python deploy_railway_v005.py",
     "healthcheckPath": "/health",
     "healthcheckTimeout": 100,
     "restartPolicyType": "ON_FAILURE",
