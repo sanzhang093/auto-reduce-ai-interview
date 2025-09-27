@@ -37,10 +37,12 @@ class SimpleRAGSystem:
     def _generate_embedding(self, text: str) -> List[float]:
         """生成文本嵌入"""
         try:
-            # 检查文本长度，如果超过8192字符则截断
-            if len(text) > 8192:
-                text = text[:8192]
-                print(f"⚠️ 文本长度超过8192字符，已截断到8192字符")
+            # 检查文本长度，如果超过4096字符则截断（减少到4096以提高处理速度）
+            if len(text) > 4096:
+                text = text[:4096]
+                # 减少日志输出频率
+                if len(text) > 8000:
+                    print(f"⚠️ 文本长度超过4096字符，已截断到4096字符")
             
             resp = dashscope.TextEmbedding.call(
                 model=self.embedding_model,
