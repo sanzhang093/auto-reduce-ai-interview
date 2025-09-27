@@ -257,6 +257,11 @@ def generate_simple_response(user_message: str) -> str:
 @app.get("/gantt_visualization.html")
 async def gantt_chart():
     """甘特图页面"""
+    import os
+    print(f"🔍 请求甘特图页面，当前目录: {os.getcwd()}")
+    print(f"🔍 文件是否存在: {os.path.exists('gantt_visualization.html')}")
+    if os.path.exists('gantt_visualization.html'):
+        print(f"🔍 文件大小: {os.path.getsize('gantt_visualization.html')} bytes")
     return FileResponse("gantt_visualization.html")
 
 @app.get("/project_report_visualization.html")
@@ -280,5 +285,24 @@ async def test_connection():
     return FileResponse("test_connection.html")
 
 if __name__ == "__main__":
+    # 启动时检查HTML文件
+    print("🚀 Railway部署启动检查:")
+    print(f"📁 当前工作目录: {os.getcwd()}")
+    
+    html_files = [
+        "gantt_visualization.html",
+        "project_report_visualization.html", 
+        "knowledge_management.html",
+        "report_visualization.html",
+        "test_connection.html",
+        "ai_chat_interface_railway.html"
+    ]
+    
+    for file in html_files:
+        exists = os.path.exists(file)
+        size = os.path.getsize(file) if exists else 0
+        print(f"  📄 {file}: {'✅' if exists else '❌'} ({size} bytes)")
+    
     port = int(os.environ.get("PORT", 8000))
+    print(f"🌐 启动服务器，端口: {port}")
     uvicorn.run(app, host="0.0.0.0", port=port)
