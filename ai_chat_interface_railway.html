@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自动减负AI应用架构 - Railway版本</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 0.9em;
+        }
+
+        .status-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #4CAF50;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+            margin-bottom: 15px;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            word-wrap: break-word;
+            line-height: 1.4;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.assistant .message-content {
+            background: #f8f9fa;
+            color: #333;
+            border: 1px solid #e9ecef;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin: 0 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .message.user .message-avatar {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .message.assistant .message-avatar {
+            background: #e9ecef;
+            color: #666;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .input-field {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-field:focus {
+            border-color: #667eea;
+        }
+
+        .send-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: transform 0.2s;
+        }
+
+        .send-button:hover {
+            transform: scale(1.05);
+        }
+
+        .send-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            margin: 10px 0;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .suggestions {
+            margin-top: 15px;
+            border-top: 1px solid #e9ecef;
+            padding-top: 15px;
+        }
+
+        .suggestion-chip {
+            display: inline-block;
+            background: #f8f9fa;
+            color: #666;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+            border: 1px solid #e9ecef;
+        }
+
+        .suggestion-chip:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border: 1px solid #f5c6cb;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border: 1px solid #c3e6cb;
+        }
+
+        /* 功能页面按钮区域 */
+        .suggestions {
+            margin-top: 15px;
+            border-top: 1px solid #e9ecef;
+            padding-top: 15px;
+        }
+
+        .suggestions > div:first-child {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .suggestion-chip {
+            display: inline-block;
+            background: #f8f9fa;
+            color: #666;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+            border: 1px solid #e9ecef;
+        }
+
+        .suggestion-chip:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        /* 功能按钮样式 */
+        .suggestion-chip[onclick*="openGanttChart"] {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-weight: bold;
+        }
+
+        .suggestion-chip[onclick*="openProgressChart"] {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            font-weight: bold;
+        }
+
+        .suggestion-chip[onclick*="openKnowledgePage"] {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            font-weight: bold;
+        }
+
+        .suggestion-chip[onclick*="openReportVisualization"] {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            font-weight: bold;
+        }
+
+        .suggestion-chip[onclick*="openProjectReport"] {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            font-weight: bold;
+        }
+
+        .suggestion-chip[onclick*="openTestConnection"] {
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            color: #333;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="status-indicator"></div>
+            <h1>🤖 自动减负AI应用架构</h1>
+            <p>Railway部署版本 - 智能项目管理助手</p>
+        </div>
+
+        <div class="chat-container">
+            <div class="messages" id="messages">
+                <div class="message assistant">
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-content">
+                        您好！我是AI管理辅助系统，基于Qwen_Max的智能项目管理助手。<br><br>
+                        我具备以下能力：<br>
+                        🧠 智能意图分析 - 理解您的自然语言需求<br>
+                        🔧 自动工具调用 - 根据意图调用相应API<br>
+                        📊 智能数据展示 - 将数据转换为易读格式<br>
+                        💬 自然语言交互 - 像聊天一样管理项目<br><br>
+                        请用自然语言告诉我您想了解什么，比如：<br>
+                        "项目进度如何？" "有哪些风险？" "生成项目报告" "团队工作负载怎么样？"<br><br>
+                        💡 我现在使用Qwen_Max模型进行智能分析和回答
+                    </div>
+                </div>
+            </div>
+
+            <div class="loading" id="loading">AI正在思考中...</div>
+
+            <div class="input-container">
+                <input type="text" id="messageInput" class="input-field" placeholder="请输入您的问题..." maxlength="500">
+                <button id="sendButton" class="send-button">📤</button>
+            </div>
+
+            <!-- 功能页面按钮区域 -->
+            <div class="suggestions" style="margin-top: 15px; border-top: 1px solid #e9ecef; padding-top: 15px;">
+                <div style="color: #666; font-size: 0.9em; margin-bottom: 10px; font-weight: bold;">🔧 功能页面</div>
+                <div class="suggestion-chip" onclick="openGanttChart()" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; font-weight: bold;">📅 甘特图</div>
+                <div class="suggestion-chip" onclick="openProgressChart()" style="background: linear-gradient(135deg, #4facfe, #00f2fe); color: white; font-weight: bold;">📈 进度图</div>
+                <div class="suggestion-chip" onclick="openKnowledgePage()" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24); color: white; font-weight: bold;">📚 知识库</div>
+                <div class="suggestion-chip" onclick="openReportVisualization()" style="background: linear-gradient(135deg, #4ecdc4, #44a08d); color: white; font-weight: bold;">📊 报告可视化</div>
+                <div class="suggestion-chip" onclick="openProjectReport()" style="background: linear-gradient(135deg, #f093fb, #f5576c); color: white; font-weight: bold;">📋 项目报告</div>
+                <div class="suggestion-chip" onclick="openTestConnection()" style="background: linear-gradient(135deg, #a8edea, #fed6e3); color: #333; font-weight: bold;">🔗 连接测试</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 动态设置API_BASE - Railway版本
+        const API_BASE = window.location.origin;
+        let isLoading = false;
+
+        console.log('Railway版本 - API_BASE设置为:', API_BASE);
+
+        // 页面加载时检查连接状态
+        document.addEventListener('DOMContentLoaded', function() {
+            checkConnection();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            const messageInput = document.getElementById('messageInput');
+            const sendButton = document.getElementById('sendButton');
+
+            // 发送按钮点击事件
+            sendButton.addEventListener('click', sendMessage);
+
+            // 输入框回车事件
+            messageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+
+            // 输入框内容变化时启用/禁用发送按钮
+            messageInput.addEventListener('input', function() {
+                sendButton.disabled = !this.value.trim() || isLoading;
+            });
+        }
+
+        async function checkConnection() {
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                if (response.ok) {
+                    console.log('✅ 连接检查成功');
+                    showStatusMessage('✅ 服务连接正常', 'success');
+                } else {
+                    console.log('❌ 连接检查失败:', response.status);
+                    showStatusMessage('❌ 服务连接异常', 'error');
+                }
+            } catch (error) {
+                console.error('❌ 连接检查错误:', error);
+                showStatusMessage('❌ 无法连接到服务', 'error');
+            }
+        }
+
+        function showStatusMessage(message, type) {
+            const messagesContainer = document.getElementById('messages');
+            const statusDiv = document.createElement('div');
+            statusDiv.className = `message assistant`;
+            statusDiv.innerHTML = `
+                <div class="message-avatar">🔗</div>
+                <div class="message-content ${type === 'error' ? 'error-message' : 'success-message'}">
+                    ${message}
+                </div>
+            `;
+            messagesContainer.appendChild(statusDiv);
+            scrollToBottom();
+        }
+
+        async function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value.trim();
+
+            if (!message || isLoading) return;
+
+            // 显示用户消息
+            addMessage(message, 'user');
+            messageInput.value = '';
+            setLoading(true);
+
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/auto-reduce/intelligent-chat/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        session_id: 'railway_session'
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.code === 200 && data.data && data.data.response) {
+                    addMessage(data.data.response, 'assistant');
+                } else {
+                    addMessage(`抱歉，AI服务返回了异常数据，请稍后再试。错误信息: ${data.message || '未知错误'}`, 'assistant');
+                }
+            } catch (error) {
+                console.error('发送消息失败:', error);
+                addMessage('抱歉，AI服务暂时不可用，请稍后再试。', 'assistant');
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        function addMessage(content, sender) {
+            const messagesContainer = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+
+            const avatar = sender === 'user' ? '👤' : '🤖';
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${avatar}</div>
+                <div class="message-content">${content}</div>
+            `;
+
+            messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        function setLoading(loading) {
+            isLoading = loading;
+            const loadingDiv = document.getElementById('loading');
+            const sendButton = document.getElementById('sendButton');
+            const messageInput = document.getElementById('messageInput');
+
+            if (loading) {
+                loadingDiv.classList.add('show');
+                sendButton.disabled = true;
+                messageInput.disabled = true;
+            } else {
+                loadingDiv.classList.remove('show');
+                sendButton.disabled = false;
+                messageInput.disabled = false;
+                messageInput.focus();
+            }
+        }
+
+        function scrollToBottom() {
+            const messagesContainer = document.getElementById('messages');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // 功能页面按钮函数
+        function openGanttChart() {
+            console.log('打开甘特图页面');
+            window.open(`${API_BASE}/gantt_visualization.html`, '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+        }
+        
+        function openProgressChart() {
+            console.log('打开进度图页面');
+            window.open(`${API_BASE}/project_report_visualization.html`, '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+        }
+        
+        function openKnowledgePage() {
+            console.log('打开知识库页面');
+            window.open(`${API_BASE}/knowledge_management.html`, '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+        }
+        
+        function openReportVisualization() {
+            console.log('打开报告可视化页面');
+            window.open(`${API_BASE}/report_visualization.html`, '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+        }
+        
+        function openProjectReport() {
+            console.log('打开项目报告页面');
+            window.open(`${API_BASE}/project_report_visualization.html`, '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+        }
+        
+        function openTestConnection() {
+            console.log('打开连接测试页面');
+            window.open(`${API_BASE}/test_connection.html`, '_blank', 'width=1000,height=600,scrollbars=yes,resizable=yes');
+        }
+    </script>
+</body>
+</html>
