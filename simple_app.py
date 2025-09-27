@@ -999,41 +999,9 @@ async def get_risk_analysis_data(db_data: dict, query_params: dict = None) -> di
                         rag_guidance.append(guidance)
                         print(f"   ✅ 风险 {i} 指导生成成功")
                     except asyncio.TimeoutError:
-                        print(f"   ⚠️ 风险 {i} 指导生成超时，使用快速备选方案")
-                        # 添加一个快速的备选指导
-                        rag_guidance.append({
-                            "risk_id": risk.get('risk_id'),
-                            "risk_title": risk.get('risk_title', ''),
-                            "risk_level": risk.get('risk_level', '未知'),
-                            "risk_type": "快速分析",
-                            "pmbok_guidance": [{
-                                "content": f"针对风险'{risk.get('risk_title', '')}'，建议采用以下PMBOK第七版风险管理策略：1. 风险识别与评估 2. 制定应对计划 3. 监控与控制",
-                                "page_number": "第11章",
-                                "section": "项目风险管理"
-                            }],
-                            "guidance_summary": f"风险'{risk.get('risk_title', '')}'需要重点关注，建议制定详细的应对计划",
-                            "actionable_advice": ["制定风险应对计划", "建立监控机制", "准备应急预案"],
-                            "priority_actions": ["立即评估影响", "制定应对策略", "分配责任人"],
-                            "fallback_mode": True
-                        })
+                        print(f"   ⚠️ 风险 {i} 指导生成超时，跳过")
                     except Exception as e:
                         print(f"   ❌ 风险 {i} 指导生成失败: {str(e)}")
-                        # 添加一个快速的备选指导
-                        rag_guidance.append({
-                            "risk_id": risk.get('risk_id'),
-                            "risk_title": risk.get('risk_title', ''),
-                            "risk_level": risk.get('risk_level', '未知'),
-                            "error": f"生成失败: {str(e)}",
-                            "pmbok_guidance": [{
-                                "content": f"针对风险'{risk.get('risk_title', '')}'，建议参考PMBOK第七版风险管理章节进行风险应对",
-                                "page_number": "第11章",
-                                "section": "项目风险管理"
-                            }],
-                            "guidance_summary": f"风险'{risk.get('risk_title', '')}'需要重点关注",
-                            "actionable_advice": ["制定风险应对计划", "建立监控机制"],
-                            "priority_actions": ["评估风险影响", "制定应对策略"],
-                            "fallback_mode": True
-                        })
                     
             except Exception as e:
                 print(f"RAG指导生成失败: {str(e)}")
