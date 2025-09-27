@@ -1,0 +1,24 @@
+# Railway部署专用依赖文件 - 简化版本
+# 只包含核心功能必需的依赖
+
+# Web框架
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+
+# AI和机器学习
+dashscope==1.14.1
+
+# 数据处理
+pandas==2.1.4
+numpy==1.25.2
+
+# HTTP请求
+requests==2.31.0
+httpx==0.25.2
+
+# 文件处理
+python-multipart==0.0.6
+
+# 环境变量
+python-dotenv==1.0.0
