@@ -364,6 +364,22 @@
         .loading-dot:nth-child(1) { animation-delay: -0.32s; }
         .loading-dot:nth-child(2) { animation-delay: -0.16s; }
 
+        /* 打字机光标效果 */
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background: #007AFF;
+            margin-left: 2px;
+            animation: cursorBlink 1s infinite;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes cursorBlink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
         /* 动画 */
         @keyframes messageSlideIn {
             from {
@@ -607,7 +623,8 @@
             showLoading();
             
             try {
-                const response = await fetch(`${API_BASE}/api/v1/auto-reduce/intelligent-chat/chat`, {
+                // 使用流式接口
+                const response = await fetch(`${API_BASE}/api/v1/auto-reduce/intelligent-chat/chat-stream`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -618,21 +635,116 @@
                     })
                 });
                 
-                const data = await response.json();
-                
-                if (data.code === 200) {
-                    // 格式化AI回答
-                    const formattedResponse = formatAIResponse(data.data.response);
-                    addMessage(formattedResponse, 'ai');
-                } else {
-                    addMessage('抱歉，AI服务暂时不可用，请稍后再试。', 'ai');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
+                
+                // 创建AI消息容器
+                const aiMessageDiv = createAIMessageContainer();
+                
+                // 读取流式响应
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+                
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    
+                    buffer += decoder.decode(value, { stream: true });
+                    const lines = buffer.split('\n');
+                    buffer = lines.pop(); // 保留最后一个不完整的行
+                    
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            try {
+                                const data = JSON.parse(line.slice(6));
+                                handleStreamData(data, aiMessageDiv);
+                            } catch (e) {
+                                console.error('解析流数据失败:', e);
+                            }
+                        }
+                    }
+                }
+                
             } catch (error) {
                 console.error('发送消息失败:', error);
                 addMessage('抱歉，网络连接出现问题，请检查网络后重试。', 'ai');
             } finally {
                 hideLoading();
             }
+        }
+
+        // 创建AI消息容器
+        function createAIMessageContainer() {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message ai';
+            messageDiv.id = 'streaming-message';
+            
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.className = 'message-bubble';
+            
+            const responseDiv = document.createElement('div');
+            responseDiv.className = 'ai-response';
+            responseDiv.innerHTML = '<div class="loading"><span>AI思考中</span><div class="loading-dots"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div></div>';
+            
+            bubbleDiv.appendChild(responseDiv);
+            
+            const timeDiv = document.createElement('div');
+            timeDiv.className = 'message-time';
+            timeDiv.textContent = new Date().toLocaleTimeString();
+            
+            messageDiv.appendChild(bubbleDiv);
+            messageDiv.appendChild(timeDiv);
+            chatMessages.appendChild(messageDiv);
+            
+            // 滚动到底部
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            return responseDiv;
+        }
+
+        // 处理流式数据
+        function handleStreamData(data, container) {
+            const chatMessages = document.getElementById('chatMessages');
+            
+            if (data.type === 'start') {
+                // 开始输出，移除加载状态
+                container.innerHTML = '';
+                container.textContent = data.content;
+                // 添加光标
+                container.innerHTML += '<span class="typing-cursor"></span>';
+            } else if (data.type === 'chunk') {
+                // 移除光标，追加内容，重新添加光标
+                const cursor = container.querySelector('.typing-cursor');
+                if (cursor) cursor.remove();
+                container.textContent += data.content;
+                container.innerHTML += '<span class="typing-cursor"></span>';
+            } else if (data.type === 'end') {
+                // 结束输出，移除光标，格式化内容
+                const cursor = container.querySelector('.typing-cursor');
+                if (cursor) cursor.remove();
+                const formattedContent = formatAIResponse(container.textContent);
+                container.innerHTML = formattedContent;
+                // 移除临时ID
+                const messageDiv = document.getElementById('streaming-message');
+                if (messageDiv) {
+                    messageDiv.removeAttribute('id');
+                }
+            } else if (data.type === 'error') {
+                // 错误处理
+                const cursor = container.querySelector('.typing-cursor');
+                if (cursor) cursor.remove();
+                container.innerHTML = `<div style="color: #ff3b30;">${data.content}</div>`;
+                const messageDiv = document.getElementById('streaming-message');
+                if (messageDiv) {
+                    messageDiv.removeAttribute('id');
+                }
+            }
+            
+            // 滚动到底部
+            chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
         // 添加消息到聊天区域

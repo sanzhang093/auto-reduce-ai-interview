@@ -6,7 +6,7 @@ Railway部署版本005 - 综合修复版本
 """
 
 from fastapi import FastAPI
-from fastapi.responses import JSONResponse, FileResponse
+from fastapi.responses import JSONResponse, FileResponse, StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import uvicorn
@@ -14,6 +14,7 @@ import json
 import os
 from datetime import datetime
 import asyncio
+import time
 
 # 创建FastAPI应用
 app = FastAPI(
@@ -65,7 +66,188 @@ async def get_projects():
             "data": []
         }
 
-# 完整的AI聊天接口 - 集成版本004的所有功能
+# 流式AI聊天接口
+@app.post("/api/v1/auto-reduce/intelligent-chat/chat-stream")
+async def chat_with_ai_stream(request: dict):
+    """AI智能对话 - 流式输出版本"""
+    async def generate_response():
+        try:
+            user_message = request.get("message", "")
+            session_id = request.get("session_id", "default")
+            
+            # 对话记忆管理
+            if not hasattr(chat_with_ai_stream, 'conversation_memory'):
+                chat_with_ai_stream.conversation_memory = {}
+            
+            if session_id not in chat_with_ai_stream.conversation_memory:
+                chat_with_ai_stream.conversation_memory[session_id] = []
+            
+            # 添加用户消息到对话历史
+            chat_with_ai_stream.conversation_memory[session_id].append({
+                "role": "user",
+                "content": user_message
+            })
+            
+            # 读取项目数据作为上下文
+            try:
+                with open("industry_standard_database_extended.json", "r", encoding="utf-8") as f:
+                    project_data = json.load(f)
+                project_context = json.dumps(project_data, ensure_ascii=False, indent=2)
+            except:
+                project_context = "项目数据暂时不可用"
+            
+            # 构建系统提示词
+            system_prompt = f"""你是AI管理辅助系统，专门帮助用户管理项目。你有以下能力：
+
+1. 意图分析：理解用户想要了解什么
+2. 数据Agent调用：通过专门的数据Agent获取准确的数据
+3. 结果输出：将数据转换为用户友好的回答，并提供数据来源和计算过程
+4. 上下文记忆：记住对话历史，提供连贯的回答
+
+## 数据Agent使用指南
+
+当用户询问涉及数据的问题时，你需要：
+1. 分析用户意图，确定需要调用哪个数据Agent
+2. 调用相应的数据Agent获取数据
+3. 基于数据Agent返回的结果，提供包含以下内容的回答：
+   - 数据来源说明
+   - 计算过程详细步骤
+   - 具体的数据支撑
+   - 清晰的结论
+
+## 可用的数据Functions（纯数据处理）：
+- project_progress：项目进度数据
+- task_analysis：任务分析数据
+- risk_analysis：风险分析数据（支持RAG指导集成）
+- budget_analysis：预算分析数据
+- team_analysis：团队分析数据
+- progress_calculation：进度计算详细过程
+- gantt_analysis：甘特图分析数据
+- chart_generation：图表生成数据
+- report_analysis：周报月报分析数据
+
+## 可用的Agent（使用LLM）：
+- knowledge_management：知识管理Agent（使用Qwen-Max模型进行智能知识提取和分类）
+
+## 专家建议功能说明：
+当用户请求"专家建议"、"专业指导"、"PMBOK指导"等时，系统会自动调用risk_analysis数据Function并启用RAG指导集成，为每个风险项提供基于PMBOK第七版的专业指导建议，包括：
+- 风险类型识别
+- PMBOK专业指导
+- 可执行的应对建议
+- 页码引用验证
+- 优先行动项
+
+## 知识管理Agent说明：
+当调用knowledge_management Agent时，系统会使用Qwen-Max模型进行智能知识提取和分类，按照5大类知识分类进行结构化汇总。
+
+**重要：在展示知识管理结果时，必须严格按照以下格式，直接输出5大类知识分类内容：**
+
+### 五大类知识细分
+1. 📋 项目过程与成果类知识
+   - 立项信息：智能管理系统开发项目基于数字化转型需求启动，目标是提升管理效率
+   - 计划与基线：预计开发周期6个月，预算50万元，遵循ISO9001质量标准
+   - 执行过程记录：当前进度65%，已完成需求分析阶段，无重大变更
+   - 成果文档：包括系统文档、测试报告（已通过）及用户手册等交付物
+
+2. 💡 经验与教训类知识
+   - 成功实践：采用敏捷开发模式，利用Jira进行项目管理，采取迭代方式交付产品
+   - 失败/问题案例：遇到技术难题导致进度延迟，主要原因是团队在某些技术领域缺乏足够经验
+   - 改进建议：建议加强前期技术调研和技术培训，同时优化资源分配以提高效率
+
+3. 🤝 管理与协同类知识
+   - 责任矩阵：定义了项目经理的角色及其职责，如整体协调及客户沟通等
+   - 决策记录：就技术选型进行了讨论，在性能与成本之间寻找平衡点
+   - 沟通记录：定期举行周例会，确认需求并调整项目范围
+
+4. 🛠️ 知识资产与方法论类知识
+   - 模板与标准：制定了需求分析、测试用例编写的标准格式及进度报告模板
+   - 流程与工具：使用Git进行版本控制，Jenkins支持自动化测试，Scrum框架指导敏捷实践
+   - 指标与度量：监控进度偏差(5%)、成本偏差(10%)及产品质量(95%)
+
+5. 🏢 组织层面价值信息
+   - 可复用知识：分享了管理系统架构设计、微服务技术架构及REST API接口规范等方面的知识
+   - 能力成熟度：总结了敏捷管理的最佳实践、风险控制的经验教训及技术选型方面的专家意见
+   - 知识共享：提供了项目管理培训材料、常见问题解答指南及项目总结交流会等内容
+
+**注意：严格禁止输出任何其他内容，包括概览信息、计算过程说明、数据处理流程等。只输出上述5大类知识分类内容。**
+
+## 数据Functions和Agent返回格式说明：
+每个数据Function和Agent都会返回包含以下字段的结构化数据：
+- success：是否成功
+- data_type：数据类型
+- data_source：数据来源
+- query_time：查询时间
+- data：具体数据
+- calculation_method：计算方法
+- calculation_steps：计算步骤（如果有）
+- data_fields：数据字段说明
+
+## 回答要求：
+1. 必须明确说明数据来源
+2. 必须提供详细的计算过程
+3. 必须用具体数据支撑结论
+4. 必须保持对话的连贯性
+5. 如果数据Agent返回失败，要说明原因
+
+当前项目数据上下文：
+{project_context}
+
+请根据用户的问题，分析意图，调用相应的数据Agent，并基于返回的数据提供详细的回答。"""
+
+            # 调用Qwen_Max API，传入对话历史
+            qwen_response = await call_qwen_api_with_history(system_prompt, chat_with_ai_stream.conversation_memory[session_id])
+            
+            # 如果Qwen返回需要调用工具，则执行工具调用
+            if "需要调用" in qwen_response or "工具" in qwen_response:
+                # 分析用户意图并调用相应API
+                api_result = await analyze_intent_and_call_api(user_message)
+                if api_result and api_result.get("success", False):
+                    # 将API结果发送给Qwen进行最终处理
+                    final_prompt = f"用户问题：{user_message}\n\nAPI调用结果：{json.dumps(api_result, ensure_ascii=False)}\n\n请基于这些数据给出用户友好的回答，特别是要详细解释计算过程。"
+                    final_response = await call_qwen_api("", final_prompt)
+                    qwen_response = final_response
+            
+            # 添加AI回复到对话历史
+            chat_with_ai_stream.conversation_memory[session_id].append({
+                "role": "assistant",
+                "content": qwen_response
+            })
+            
+            # 流式输出响应 - 逐字符输出
+            for i, char in enumerate(qwen_response):
+                if i == 0:
+                    yield f"data: {json.dumps({'type': 'start', 'content': char}, ensure_ascii=False)}\n\n"
+                else:
+                    yield f"data: {json.dumps({'type': 'chunk', 'content': char}, ensure_ascii=False)}\n\n"
+                
+                # 模拟打字效果 - 根据字符类型调整速度
+                if char in '。！？，；：':
+                    await asyncio.sleep(0.2)  # 标点符号后稍作停顿
+                elif char == '\n':
+                    await asyncio.sleep(0.1)  # 换行后稍作停顿
+                elif char == ' ':
+                    await asyncio.sleep(0.03)  # 空格稍作停顿
+                else:
+                    await asyncio.sleep(0.05)  # 普通字符
+            
+            # 发送结束信号
+            yield f"data: {json.dumps({'type': 'end', 'content': ''}, ensure_ascii=False)}\n\n"
+            
+        except Exception as e:
+            error_msg = f"AI聊天失败: {str(e)}"
+            yield f"data: {json.dumps({'type': 'error', 'content': error_msg}, ensure_ascii=False)}\n\n"
+    
+    return StreamingResponse(
+        generate_response(),
+        media_type="text/plain",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "Content-Type": "text/event-stream",
+        }
+    )
+
+# 完整的AI聊天接口 - 集成版本004的所有功能（保留兼容性）
 @app.post("/api/v1/auto-reduce/intelligent-chat/chat")
 async def chat_with_ai(request: dict):
     """AI智能对话 - 集成Qwen_Max模型和完整的数据Agent系统"""
