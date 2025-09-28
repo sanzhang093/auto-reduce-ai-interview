@@ -199,24 +199,7 @@ async def chat_with_ai(request: dict):
         if "需要调用" in qwen_response or "工具" in qwen_response:
             # 分析用户意图并调用相应API
             api_result = await analyze_intent_and_call_api(user_message)
-            if api_result:
-                # 如果是进度计算请求，调用专门的进度计算API
-                if api_result.get("type") == "progress_calculation":
-                    # 从对话历史中提取项目ID
-                    project_id = "PRJ-2024-001"  # 默认项目
-                    for msg in chat_with_ai.conversation_memory[session_id]:
-                        if "智能管理系统" in msg.get("content", ""):
-                            project_id = "PRJ-2024-001"
-                            break
-                        elif "客户关系管理" in msg.get("content", ""):
-                            project_id = "PRJ-2024-002"
-                            break
-                    
-                    # 调用进度计算API
-                    progress_calc_response = await get_project_progress_calculation(project_id)
-                    if progress_calc_response["code"] == 200:
-                        api_result = progress_calc_response["data"]
-                
+            if api_result and api_result.get("success", False):
                 # 将API结果发送给Qwen进行最终处理
                 final_prompt = f"用户问题：{user_message}\n\nAPI调用结果：{json.dumps(api_result, ensure_ascii=False)}\n\n请基于这些数据给出用户友好的回答，特别是要详细解释计算过程。"
                 final_response = await call_qwen_api("", final_prompt)
@@ -245,42 +228,108 @@ async def chat_with_ai(request: dict):
             "data": None
         }
 
-# 数据Agent函数 - 从版本004复制
-async def analyze_intent_and_call_api(user_message: str):
-    """分析用户意图并调用相应的API"""
+# 数据Agent函数 - 严格按照版本004实现
+async def data_agent(query_type: str, query_params: dict = None) -> dict:
+    """数据获取Agent - 专门负责获取和计算数据"""
     try:
         # 读取项目数据
-        with open("industry_standard_database_extended.json", "r", encoding="utf-8") as f:
-            data = json.load(f)
+        db_path = "industry_standard_database_extended.json"
+        if not os.path.exists(db_path):
+            return {
+                "success": False,
+                "error": "数据源文件不存在",
+                "data_source": db_path
+            }
+            
+        with open(db_path, 'r', encoding='utf-8') as f:
+            db_data = json.load(f)
         
-        user_message_lower = user_message.lower()
-        
-        # 意图分析
-        if "进度" in user_message_lower or "progress" in user_message_lower:
-            return await get_project_progress_data(data)
-        elif "任务" in user_message_lower or "task" in user_message_lower:
-            return await get_task_analysis_data(data)
-        elif "风险" in user_message_lower or "risk" in user_message_lower:
-            return await get_risk_analysis_data(data)
-        elif "预算" in user_message_lower or "budget" in user_message_lower:
-            return await get_budget_analysis_data(data)
-        elif "团队" in user_message_lower or "team" in user_message_lower:
-            return await get_team_analysis_data(data)
-        elif "甘特图" in user_message_lower or "gantt" in user_message_lower:
-            return await get_gantt_analysis_data(data)
-        elif "报告" in user_message_lower or "report" in user_message_lower:
-            return await get_report_analysis_data(data)
-        elif "知识" in user_message_lower or "knowledge" in user_message_lower:
-            return await get_knowledge_management_data(data)
+        # 根据查询类型获取数据
+        if query_type == "project_progress":
+            return await get_project_progress_data(db_data, query_params)
+        elif query_type == "task_analysis":
+            return await get_task_analysis_data(db_data, query_params)
+        elif query_type == "risk_analysis":
+            return await get_risk_analysis_data(db_data, query_params)
+        elif query_type == "budget_analysis":
+            return await get_budget_analysis_data(db_data, query_params)
+        elif query_type == "team_analysis":
+            return await get_team_analysis_data(db_data, query_params)
+        elif query_type == "progress_calculation":
+            return await get_progress_calculation_data(db_data, query_params)
+        elif query_type == "gantt_analysis":
+            return await get_gantt_analysis_data(db_data, query_params)
+        elif query_type == "chart_generation":
+            return await get_chart_generation_data(db_data, query_params)
+        elif query_type == "report_analysis":
+            return await get_report_analysis_data(db_data, query_params)
+        elif query_type == "knowledge_management":
+            return await get_knowledge_management_data(db_data, query_params)
         else:
-            return await get_project_progress_data(data)  # 默认返回进度数据
+            return {
+                "success": False,
+                "error": f"未知的查询类型: {query_type}",
+                "data_source": db_path
+            }
         
     except Exception as e:
         return {
             "success": False,
-            "error": str(e),
-            "data_type": "error",
-            "data_source": "intent_analysis"
+            "error": f"数据获取失败: {str(e)}",
+            "data_source": "industry_standard_database_extended.json"
+        }
+
+async def analyze_intent_and_call_api(user_message: str) -> dict:
+    """分析用户意图并调用数据Agent - 严格按照版本004实现"""
+    message_lower = user_message.lower()
+    
+    # 意图分析并调用数据Agent
+    if any(keyword in message_lower for keyword in ['进度', '进展', '状态', '项目']):
+        # 检查是否是询问计算过程
+        if any(keyword in message_lower for keyword in ['计算', '怎么', '如何', '得出', '过程', '详细']):
+            return await data_agent("progress_calculation", {"project_id": "PRJ-2024-001"})
+        else:
+            return await data_agent("project_progress")
+    
+    elif any(keyword in message_lower for keyword in ['任务', '工作', '待办', 'todo']):
+        return await data_agent("task_analysis")
+    
+    elif any(keyword in message_lower for keyword in ['风险', '问题', '扫描', '警告']):
+        # 检查是否需要专家建议
+        if any(keyword in message_lower for keyword in ['专家建议', '专业指导', 'pmbok', '指导建议']):
+            return await data_agent("risk_analysis", {"include_rag_guidance": True})
+        else:
+            return await data_agent("risk_analysis")
+    
+    elif any(keyword in message_lower for keyword in ['专家建议', '专业指导', 'pmbok指导', '项目管理指导', '风险指导']):
+        return await data_agent("risk_analysis", {"include_rag_guidance": True})
+    
+    elif any(keyword in message_lower for keyword in ['知识管理', '知识汇总', '知识沉淀', '经验总结', '最佳实践', '进行知识管理', '知识库', '知识资产']):
+        return await data_agent("knowledge_management")
+    
+    elif any(keyword in message_lower for keyword in ['周报', '月报', '报告', '汇报', '总结']):
+        return await data_agent("report_analysis")
+    
+    elif any(keyword in message_lower for keyword in ['报告', '总结', '日报', '汇总']):
+        return await data_agent("project_progress")
+    
+    elif any(keyword in message_lower for keyword in ['团队', '人员', '工作负载', '成员']):
+        return await data_agent("team_analysis")
+    
+    elif any(keyword in message_lower for keyword in ['预算', '成本', '费用', '资金']):
+        return await data_agent("budget_analysis")
+    
+    elif any(keyword in message_lower for keyword in ['甘特图', '进度图', '时间线', '计划', 'sprint', '迭代']):
+        return await data_agent("gantt_analysis")
+    
+    elif any(keyword in message_lower for keyword in ['图表', '可视化', '图形', '画图', '展示']):
+        return await data_agent("chart_generation")
+    
+    else:
+        return {
+            "success": False,
+            "error": "无法识别用户意图",
+            "available_queries": ["项目进度", "任务分析", "风险分析", "预算分析", "团队分析", "进度计算"]
         }
 
 # 项目进度数据Agent
@@ -657,48 +706,240 @@ async def get_knowledge_management_data(db_data: dict) -> dict:
             "data_source": "industry_standard_database_extended.json"
         }
 
+# 进度计算数据Agent - 严格按照版本004实现
+async def get_progress_calculation_data(db_data: dict, query_params: dict = None) -> dict:
+    """获取项目进度详细计算过程"""
+    try:
+        project_id = query_params.get('project_id', 'PRJ-2024-001') if query_params else 'PRJ-2024-001'
+        
+        # 查找项目
+        project = None
+        for p in db_data.get('projects', []):
+            if p.get('project_id') == project_id:
+                project = p
+                break
+        
+        if not project:
+            return {
+                "success": False,
+                "error": f"项目 {project_id} 不存在",
+                "data_type": "progress_calculation",
+                "data_source": "industry_standard_database_extended.json"
+            }
+        
+        # 获取项目相关任务
+        project_tasks = [task for task in db_data.get('tasks', [])
+                        if task.get('project_id') == project_id]
+        
+        # 获取项目指标
+        metrics = db_data.get('project_metrics', {}).get(project_id, {})
+        
+        # 计算详细进度
+        total_tasks = len(project_tasks)
+        if total_tasks == 0:
+            return {
+                "success": True,
+                "data_type": "progress_calculation",
+                "data_source": "industry_standard_database_extended.json",
+                "query_time": datetime.now().isoformat(),
+                "project_id": project_id,
+                "data": {
+                    "project_name": project.get('project_name', ''),
+                    "calculated_progress": 0.0,
+                    "database_progress": project.get('progress_percentage', 0),
+                    "calculation_method": "无任务数据",
+                    "total_tasks": 0,
+                    "detailed_breakdown": [],
+                    "metrics_from_db": metrics
+                },
+                "calculation_method": "项目无任务数据",
+                "calculation_steps": ["项目无任务数据，无法计算进度"],
+                "data_fields": {
+                    "tasks": ["task_id", "task_name", "status", "progress_percentage", "project_id"],
+                    "metrics": ["progress_percentage", "budget_utilization", "schedule_variance"]
+                }
+            }
+        
+        # 按状态分组任务
+        status_groups = {}
+        for task in project_tasks:
+            status = task.get('status', '未知状态')
+            if status not in status_groups:
+                status_groups[status] = []
+            status_groups[status].append(task)
+        
+        # 计算每个状态组的平均进度
+        total_weighted_progress = 0
+        total_weight = 0
+        detailed_breakdown = []
+        
+        for status, tasks_in_status in status_groups.items():
+            # 计算该状态组的平均进度
+            if status == '已完成':
+                avg_progress = 100.0
+            elif status == '进行中':
+                avg_progress = sum(task.get('progress_percentage', 0) for task in tasks_in_status) / len(tasks_in_status)
+            else:  # 待开始等
+                avg_progress = 0.0
+            
+            weight = len(tasks_in_status)
+            weighted_progress = avg_progress * weight
+            
+            total_weighted_progress += weighted_progress
+            total_weight += weight
+            
+            detailed_breakdown.append({
+                "status": status,
+                "task_count": len(tasks_in_status),
+                "average_progress": avg_progress,
+                "weight": weight,
+                "weighted_progress": weighted_progress,
+                "tasks": [{"task_id": t.get('task_id'), "task_name": t.get('task_name'), "progress_percentage": t.get('progress_percentage', 0)} for t in tasks_in_status]
+            })
+        
+        # 计算整体进度
+        calculated_progress = (total_weighted_progress / total_weight) if total_weight > 0 else 0.0
+        
+        calculation_steps = [
+            f"1. 获取项目 {project_id} 的所有任务数据",
+            f"2. 按状态分组任务，共 {len(status_groups)} 个状态组",
+            f"3. 计算每个状态组的平均进度",
+            f"4. 使用加权平均法计算整体进度: {calculated_progress:.1f}%",
+            f"5. 对比数据库中的进度指标: {project.get('progress_percentage', 0)}%"
+        ]
+        
+        return {
+            "success": True,
+            "data_type": "progress_calculation",
+            "data_source": "industry_standard_database_extended.json",
+            "query_time": datetime.now().isoformat(),
+            "project_id": project_id,
+            "data": {
+                "project_name": project.get('project_name', ''),
+                "calculated_progress": calculated_progress,
+                "database_progress": project.get('progress_percentage', 0),
+                "calculation_method": "加权平均法",
+                "formula": "整体进度 = Σ(状态平均进度 × 状态任务数) / 总任务数",
+                "total_tasks": total_tasks,
+                "total_weighted_progress": total_weighted_progress,
+                "total_weight": total_weight,
+                "detailed_breakdown": detailed_breakdown,
+                "metrics_from_db": metrics
+            },
+            "calculation_method": "基于任务进度的加权平均计算",
+            "calculation_steps": calculation_steps,
+            "data_fields": {
+                "tasks": ["task_id", "task_name", "status", "progress_percentage", "project_id"],
+                "metrics": ["progress_percentage", "budget_utilization", "schedule_variance"]
+            }
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e),
+            "data_type": "progress_calculation",
+            "data_source": "industry_standard_database_extended.json"
+        }
+
+# 图表生成数据Agent
+async def get_chart_generation_data(db_data: dict, query_params: dict = None) -> dict:
+    """获取图表生成数据"""
+    try:
+        projects = db_data.get('projects', [])
+        tasks = db_data.get('tasks', [])
+        
+        # 生成图表数据
+        chart_data = {
+            "project_progress_chart": {
+                "type": "bar",
+                "title": "项目进度对比",
+                "data": []
+            },
+            "task_status_chart": {
+                "type": "pie",
+                "title": "任务状态分布",
+                "data": []
+            },
+            "budget_utilization_chart": {
+                "type": "line",
+                "title": "预算使用情况",
+                "data": []
+            }
+        }
+        
+        # 项目进度数据
+        for project in projects:
+            chart_data["project_progress_chart"]["data"].append({
+                "name": project.get('project_name', ''),
+                "value": project.get('progress_percentage', 0),
+                "budget": project.get('budget', 0),
+                "actual_cost": project.get('actual_cost', 0)
+            })
+        
+        # 任务状态数据
+        status_counts = {}
+        for task in tasks:
+            status = task.get('status', '未知状态')
+            status_counts[status] = status_counts.get(status, 0) + 1
+        
+        for status, count in status_counts.items():
+            chart_data["task_status_chart"]["data"].append({
+                "name": status,
+                "value": count
+            })
+        
+        # 预算使用数据
+        for project in projects:
+            budget_utilization = (project.get('actual_cost', 0) / project.get('budget', 1)) * 100 if project.get('budget', 0) > 0 else 0
+            chart_data["budget_utilization_chart"]["data"].append({
+                "name": project.get('project_name', ''),
+                "budget_utilization": budget_utilization,
+                "budget": project.get('budget', 0),
+                "actual_cost": project.get('actual_cost', 0)
+            })
+        
+        return {
+            "success": True,
+            "data_type": "chart_generation",
+            "data_source": "industry_standard_database_extended.json",
+            "query_time": datetime.now().isoformat(),
+            "data": chart_data,
+            "calculation_method": "基于项目数据和任务数据生成图表配置",
+            "data_fields": {
+                "project_progress_chart": "项目进度柱状图数据",
+                "task_status_chart": "任务状态饼图数据",
+                "budget_utilization_chart": "预算使用折线图数据"
+            }
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e),
+            "data_type": "chart_generation",
+            "data_source": "industry_standard_database_extended.json"
+        }
+
 async def get_project_progress_calculation(project_id: str) -> dict:
-    """获取项目进度计算详细过程"""
+    """获取项目进度计算详细过程 - API接口版本"""
     try:
         with open("industry_standard_database_extended.json", "r", encoding="utf-8") as f:
             data = json.load(f)
         
-        projects = data.get('projects', [])
-        tasks = data.get('tasks', [])
+        # 调用数据Agent
+        result = await get_progress_calculation_data(data, {"project_id": project_id})
         
-        # 找到指定项目
-        project = next((p for p in projects if p.get('project_id') == project_id), None)
-        if not project:
-            return {"code": 404, "message": "项目不存在", "data": None}
-        
-        # 计算项目进度
-        project_tasks = [t for t in tasks if t.get('project_id') == project_id]
-        if not project_tasks:
-            return {"code": 200, "message": "项目无任务", "data": {"progress": 0, "calculation_steps": []}}
-        
-        completed_tasks = len([t for t in project_tasks if t.get('status') == '已完成'])
-        total_tasks = len(project_tasks)
-        progress_percentage = (completed_tasks / total_tasks) * 100
-        
-        calculation_steps = [
-            f"1. 统计项目 {project_id} 的总任务数: {total_tasks}",
-            f"2. 统计已完成任务数: {completed_tasks}",
-            f"3. 计算进度百分比: ({completed_tasks} / {total_tasks}) × 100 = {progress_percentage:.2f}%"
-        ]
-        
-        return {
-            "code": 200,
-            "message": "进度计算成功",
-            "data": {
-                "project_id": project_id,
-                "project_name": project.get('project_name', ''),
-                "progress_percentage": progress_percentage,
-                "total_tasks": total_tasks,
-                "completed_tasks": completed_tasks,
-                "calculation_steps": calculation_steps,
-                "calculation_method": "基于任务完成状态计算项目进度"
+        if result["success"]:
+            return {
+                "code": 200,
+                "message": "进度计算成功",
+                "data": result["data"]
             }
-        }
+        else:
+            return {
+                "code": 500,
+                "message": result["error"],
+                "data": None
+            }
     except Exception as e:
         return {"code": 500, "message": f"进度计算失败: {str(e)}", "data": None}
 
@@ -869,3 +1110,4 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
     print(f"🌐 启动服务器，端口: {port}")
     uvicorn.run(app, host="0.0.0.0", port=port)
+
